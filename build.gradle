@@ -1,6 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.32"
+    ext{
+        kotlin_version = "1.4.32"
+        spinkit_version = "1.4.0"
+        glideVersion = '4.11.0'
+
+        //navigate
+        navVersion = "2.3.5"
+        legacySupportVersion = '1.0.0'
+
+        bubbleNavigationVersion = '1.0.7'
+    }
     repositories {
         google()
         jcenter()

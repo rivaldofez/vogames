@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/gamesFragment">
+
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.rivaldofez.vogames.games.GamesFragment"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games" >
+        <action
+            android:id="@+id/action_gamesFragment_to_favoriteFragment2"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_aboutFragment2"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.rivaldofez.vogames.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_gamesFragment2"
+            app:destination="@id/gamesFragment" />
+        <action
+            android:id="@+id/action_aboutFragment_to_favoriteFragment2"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.rivaldofez.vogames.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_gamesFragment2"
+            app:destination="@id/gamesFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_aboutFragment2"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+</navigation>

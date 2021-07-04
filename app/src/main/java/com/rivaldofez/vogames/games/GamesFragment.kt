@@ -5,56 +5,56 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rivaldofez.vogames.R
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import com.rivaldofez.vogames.core.data.source.Resource
+import com.rivaldofez.vogames.core.domain.model.Game
+import com.rivaldofez.vogames.core.ui.GameAdapter
+import com.rivaldofez.vogames.core.ui.GameFragmentCallback
+import com.rivaldofez.vogames.databinding.FragmentGamesBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GamesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class GamesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class GamesFragment : Fragment(), GameFragmentCallback {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val gamesViewModel: GamesViewModel by viewModel()
+
+    private lateinit var binding: FragmentGamesBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_games, container, false)
+        binding = FragmentGamesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GamesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GamesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if(activity != null){
+            val gameAdapter = GameAdapter(this)
+
+            gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
+                if(games != null){
+                    when(games){
+                        is Resource.Success -> {
+                            gameAdapter.setGames(games.data)
+                        }
+                    }
                 }
+            })
+
+            with(binding.rvGame){
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = gameAdapter
             }
+
+        }
+    }
+
+    override fun onGameClick(game: Game) {
+        Toast.makeText(requireContext(), game.name, Toast.LENGTH_SHORT).show()
     }
 }

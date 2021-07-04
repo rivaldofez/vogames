@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.VOGames" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black_500</item>
-        <item name="colorPrimaryVariant">@color/black_700</item>
+        <item name="colorPrimary">@color/black_700</item>
+        <item name="colorPrimaryVariant">@color/black_500</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -17,5 +17,11 @@
     <style name="Theme.VOGames.NoToolbar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+        <item name="color">@color/white</item>
     </style>
 </resources>

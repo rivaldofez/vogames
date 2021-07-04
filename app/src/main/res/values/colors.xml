@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="black_200">#36383a</color>
+    <color name="black_200">#c0c4cb</color>
     <color name="black_500">#343a4a</color>
-    <color name="black_700">#232631</color>
+    <color name="black_700">#0e0f15</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gold">#f7c30e</color>
 </resources>

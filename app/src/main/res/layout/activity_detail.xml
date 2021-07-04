@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_700"
+    tools:context=".detail.DetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_back_poster"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundImageView"
+            tools:src="@drawable/example" />
+
+        <com.ramijemli.percentagechartview.PercentageChartView
+            android:id="@+id/chart_popularity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_back_poster"
+            app:layout_constraintEnd_toEndOf="@+id/img_back_poster"
+            app:pcv_animDuration="800"
+            app:pcv_animInterpolator="anticipate_overshoot"
+            app:pcv_backgroundBarColor="@color/black_700"
+            app:pcv_backgroundBarThickness="6dp"
+            app:pcv_mode="ring"
+            app:pcv_orientation="clockwise"
+            app:pcv_progress="50"
+            app:pcv_progressBarThickness="5dp"
+            app:pcv_progressColor="@color/gold"
+            app:pcv_startAngle="270" />
+
+        <TextView
+            android:id="@+id/tv_game_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="center"
+            android:text="Battle Field"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_back_poster" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_platform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_name">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_windows"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_playstation"
+                app:tint="@color/white" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/tv_release_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Release Date"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cg_platform" />
+
+        <TextView
+            android:id="@+id/tv_release"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="Jun 11, 2021"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_release_title" />
+
+        <TextView
+            android:id="@+id/tv_about_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="About"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_release" />
+
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="Lorem ipsum dolor sit amet"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_about_title" />
+
+        <TextView
+            android:id="@+id/tv_genre_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Genre"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_about" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_genre_title">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="Testimoni"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:chipBackgroundColor="@color/black_500"
+                app:chipMinHeight="24dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:textEndPadding="6dp"
+                app:textStartPadding="6dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="Pote"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:chipBackgroundColor="@color/black_500"
+                app:chipMinHeight="24dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:textEndPadding="6dp"
+                app:textStartPadding="6dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/tv_publisher_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Publisher"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cg_genres" />
+
+        <TextView
+            android:id="@+id/tv_publisher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="Sony Interactive Entertainment"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_publisher_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

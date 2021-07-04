@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.core.ui.GameAdapter
@@ -56,5 +59,6 @@ class GamesFragment : Fragment(), GameFragmentCallback {
 
     override fun onGameClick(game: Game) {
         Toast.makeText(requireContext(), game.name, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.detailActivity)
     }
 }

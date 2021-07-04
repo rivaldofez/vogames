@@ -49,6 +49,9 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
             with(binding){
                 tvTitle.text = game.name
                 ratingGame.rating = game.rating.toFloat()
+
+                cvItemGame.setOnClickListener{callback.onGameClick(game)}
+
                 Glide.with(itemView.context).load(game.backgroundImage)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
                     .error(R.drawable.ic_error)).into(imgPoster)

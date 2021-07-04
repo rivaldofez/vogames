@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_gamesFragment_to_aboutFragment2"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -41,4 +44,9 @@
             android:id="@+id/action_favoriteFragment_to_aboutFragment2"
             app:destination="@id/aboutFragment" />
     </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.rivaldofez.vogames.detail.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" />
 </navigation>

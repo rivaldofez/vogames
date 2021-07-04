@@ -25,7 +25,7 @@ class GamesFragment : Fragment(), GameFragmentCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGamesBinding.inflate(inflater, container, false)
         return binding.root
     }

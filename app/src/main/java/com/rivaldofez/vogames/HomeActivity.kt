@@ -2,6 +2,7 @@ package com.rivaldofez.vogames
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import com.rivaldofez.vogames.databinding.ActivityHomeBinding
 import com.rivaldofez.vogames.favorite.FavoriteFragment
@@ -16,6 +17,9 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navController = findNavController(R.id.nav_host_fragment)
+
+        binding.navFavorite.visibility = View.GONE
+        binding.navAbout.visibility = View.GONE
 
         binding.bnavMain.setNavigationChangeListener{_, position ->
             when(position){

@@ -62,7 +62,7 @@ object DataMapper {
             name = input.name,
             rating = input.rating,
             backgroundImage = input.backgroundImage,
-            isFavorite = input.isFavorite
+            isFavorite = false
         )
 
     fun mapDetailResponseToLocal(input: GameDetailResponse): GameDetailLocalEntity =
@@ -158,5 +158,6 @@ object DataMapper {
             twitchCount = 0,
             backgroundImageAdditional = "",
             screenshotsCount = 0,
+            isFavorite = false
         )
 }

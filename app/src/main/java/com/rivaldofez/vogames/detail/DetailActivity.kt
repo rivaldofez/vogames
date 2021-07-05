@@ -2,6 +2,7 @@ package com.rivaldofez.vogames.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
@@ -22,17 +23,33 @@ class DetailActivity : AppCompatActivity() {
 
         val gameId = DetailActivityArgs.fromBundle(intent.extras as Bundle).gameId
         if(gameId != null){
-            detailGameViewModel.setCurrentGame(gameId)
-            detailGameViewModel.detailGame?.observe(this, { detailGame ->
+            detailGameViewModel.getDetailGame(gameId).observe(this, { detailGame ->
                 when (detailGame) {
                     is Resource.Success -> {
-                        Toast.makeText(this, detailGame.data?.name, Toast.LENGTH_SHORT).show()
+                        Log.d("Teston","sukses")
+                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                        Glide.with(this).load(detailGame.data?.backgroundImage).into(binding.imgBackPoster)
+                        binding.tvGameName.text = detailGame.data?.name
+                        binding.tvAbout.text = detailGame.data?.rating.toString()
+                        binding.tvPublisher.text = detailGame.data?.backgroundImage
+
+                        detailGame.data?.backgroundImage?.let { Log.d("Teston", it) }
+                        detailGame.data?.let { Log.d("Teston", it.name) }
+                        Toast.makeText(this, detailGame.data?.backgroundImage, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, detailGame.data?.rating.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Error -> {
+                        Log.d("Teston", "error")
+                    }
+
+                    is Resource.Loading -> {
+                        Log.d("Teston", "loading")
                     }
                 }
+                Log.d("Teston", detailGame.toString())
             })
-            Toast.makeText(this,gameId, Toast.LENGTH_SHORT).show()
         }else{
-            Toast.makeText(this,"Id Kosong", Toast.LENGTH_SHORT).show()
+            Log.d("Teston", "id kosong")
         }
 
 

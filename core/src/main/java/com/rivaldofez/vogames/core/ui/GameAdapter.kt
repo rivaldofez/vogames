@@ -48,7 +48,10 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
         fun bind(game: Game){
             with(binding){
                 tvTitle.text = game.name
-                ratingGame.rating = game.rating.toFloat()
+                if(game.rating != null){
+                    ratingGame.rating = game.rating.toFloat()
+                }
+
 
                 cvItemGame.setOnClickListener{callback.onGameClick(game)}
 

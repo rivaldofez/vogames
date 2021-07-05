@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface IGameRepository {
     fun getRecentlyGames(): Flow<Resource<List<Game>>>
 
-    fun getDetailGame(id: String): Flow<Resource<DetailGame>>
+    fun getDetailGame(id: String): Flow<Resource<DetailGame?>>
 
     fun getFavoriteGames(): Flow<List<DetailGame>>
 

@@ -60,7 +60,7 @@ class GamesFragment : Fragment(), GameFragmentCallback {
     }
 
     override fun onGameClick(game: Game) {
-        Toast.makeText(requireContext(), game.name, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireContext(), game.name, Toast.LENGTH_SHORT).show()
         val gotoDetailActivity = GamesFragmentDirections.actionGamesFragmentToDetailActivity(game.id.toString())
         findNavController().navigate(gotoDetailActivity)
     }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="#393939"
+        app:cardBackgroundColor="@color/black_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -40,7 +40,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="BattleField 2"
                 android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,12 +48,16 @@
 
             <RatingBar
                 android:id="@+id/rating_game"
-                style="?android:attr/ratingBarStyleSmall"
+                style="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:stepSize="0.1"
+                android:progressTint="@color/gold"
+                android:backgroundTint="@color/gold"
+                android:secondaryProgressTint="@android:color/transparent"
+                android:progressBackgroundTint="@color/duskgray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />

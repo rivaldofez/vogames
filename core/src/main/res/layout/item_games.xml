@@ -32,32 +32,72 @@
                 tools:src="@drawable/example" />
 
             <TextView
+                android:id="@+id/tv_metacritic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="96"
+                android:textStyle="bold"
+                android:padding="6dp"
+                android:background="@drawable/bg_metaround"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/img_poster"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_platform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_poster">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_windows"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_playstation"
+                    app:tint="@color/white" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="BattleField 2"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_poster" />
+                app:layout_constraintTop_toBottomOf="@+id/cg_platform" />
 
             <RatingBar
                 android:id="@+id/rating_game"
                 style="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="16dp"
-                android:stepSize="0.1"
-                android:progressTint="@color/gold"
                 android:backgroundTint="@color/gold"
-                android:secondaryProgressTint="@android:color/transparent"
                 android:progressBackgroundTint="@color/duskgray"
+                android:progressTint="@color/gold"
+                android:secondaryProgressTint="@android:color/transparent"
+                android:stepSize="0.1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />

@@ -17,4 +17,6 @@ dependencies {
 
     //paging
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+
+    implementation "com.ramijemli.percentagechartview:percentagechartview:$percentageChartVersion"
 }

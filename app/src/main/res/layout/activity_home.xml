@@ -59,7 +59,7 @@
             app:bt_colorActive="@color/white"
             app:bt_colorInactive="@color/black_200"
             app:bt_icon="@drawable/ic_home"
-            app:bt_shape="@drawable/bg_toggle_navigation"
+            app:bt_shape="@drawable/bg_metaround"
             app:bt_title="Home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -69,7 +69,7 @@
             app:bt_colorActive="@color/white"
             app:bt_colorInactive="@color/black_200"
             app:bt_icon="@drawable/ic_favorite"
-            app:bt_shape="@drawable/bg_toggle_navigation"
+            app:bt_shape="@drawable/bg_metaround"
             app:bt_title="Favorite" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -79,7 +79,7 @@
             app:bt_colorActive="@color/white"
             app:bt_colorInactive="@color/black_200"
             app:bt_icon="@drawable/ic_about"
-            app:bt_shape="@drawable/bg_toggle_navigation"
+            app:bt_shape="@drawable/bg_metaround"
             app:bt_title="Favorite" />
 
         <!-- Add more child items here - max upto 5 -->

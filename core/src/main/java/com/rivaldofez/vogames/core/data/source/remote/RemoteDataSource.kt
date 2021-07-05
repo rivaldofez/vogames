@@ -4,7 +4,9 @@ import android.util.Log
 import com.rivaldofez.core.data.source.remote.network.ApiResponse
 import com.rivaldofez.core.data.source.remote.network.ApiService
 import com.rivaldofez.core.data.source.remote.response.GameListItem
+import com.rivaldofez.core.data.source.remote.response.GamesResponse
 import com.rivaldofez.vogames.core.BuildConfig
+import com.rivaldofez.vogames.core.data.source.remote.response.GameDetailResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -29,5 +31,17 @@ class RemoteDataSource(private val apiService: ApiService) {
                 Log.e("RemoteDataSource", e.toString())
             }
         }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getDetailGame(id: String): Flow<ApiResponse<GameDetailResponse>> {
+        return flow {
+            try {
+                val response: GameDetailResponse = apiService.getDetailGame(BuildConfig.API_KEY, id)
+                    emit(ApiResponse.Success(response))
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("Remote Data Source", e.toString())
+            }
+        }
     }
 }

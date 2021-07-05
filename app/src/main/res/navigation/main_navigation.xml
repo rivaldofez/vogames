@@ -48,5 +48,9 @@
         android:id="@+id/detailActivity"
         android:name="com.rivaldofez.vogames.detail.DetailActivity"
         android:label="activity_detail"
-        tools:layout="@layout/activity_detail" />
+        tools:layout="@layout/activity_detail" >
+        <argument
+            android:name="gameId"
+            app:argType="string" />
+    </activity>
 </navigation>

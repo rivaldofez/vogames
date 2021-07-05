@@ -44,10 +44,10 @@
         android:id="@+id/bnav_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_navbar"
+        android:background="@color/black_700"
         android:elevation="8dp"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="10dp"
         app:bnc_mode="spread"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -57,9 +57,9 @@
             android:layout_height="wrap_content"
             app:bt_active="true"
             app:bt_colorActive="@color/white"
-            app:bt_colorInactive="@color/black_200"
+            app:bt_colorInactive="@color/duskgray"
             app:bt_icon="@drawable/ic_home"
-            app:bt_shape="@drawable/bg_metaround"
+            app:bt_shape="@drawable/bg_chip_navbar"
             app:bt_title="Home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -67,9 +67,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/white"
-            app:bt_colorInactive="@color/black_200"
+            app:bt_colorInactive="@color/duskgray"
             app:bt_icon="@drawable/ic_favorite"
-            app:bt_shape="@drawable/bg_metaround"
+            app:bt_shape="@drawable/bg_chip_navbar"
             app:bt_title="Favorite" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -77,9 +77,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/white"
-            app:bt_colorInactive="@color/black_200"
+            app:bt_colorInactive="@color/duskgray"
             app:bt_icon="@drawable/ic_about"
-            app:bt_shape="@drawable/bg_metaround"
+            app:bt_shape="@drawable/bg_chip_navbar"
             app:bt_title="Favorite" />
 
         <!-- Add more child items here - max upto 5 -->

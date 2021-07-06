@@ -18,12 +18,10 @@ object DataMapper {
                 rating = it.rating,
                 metacritic = it.metacritic,
                 playtime = it.playtime,
-//                userGame = it.userGame,
                 ratingTop = it.ratingTop,
                 reviewsCount = it.reviewsCount,
                 reviewsTextCount = it.reviewsTextCount,
                 saturatedColor = it.saturatedColor,
-//                addedByStatus = it.addedByStatus,
                 ratingsCount = it.ratingsCount,
                 slug = it.slug,
                 released = it.released,
@@ -31,10 +29,8 @@ object DataMapper {
                 backgroundImage = it.backgroundImage,
                 tba = it.tba,
                 dominantColor = it.dominantColor,
-//                esrbRating = it.esrbRating,
                 name = it.name,
                 updated = it.updated,
-//                clip = it.clip
             )
             gameList.add(game)
         }

@@ -3,10 +3,9 @@ package com.rivaldofez.vogames.core.data.source
 import android.util.Log
 import com.rivaldofez.core.data.source.remote.RemoteDataSource
 import com.rivaldofez.core.data.source.remote.network.ApiResponse
-import com.rivaldofez.core.data.source.remote.response.GameListItem
 import com.rivaldofez.vogames.core.data.source.local.LocalDataSource
-import com.rivaldofez.vogames.core.data.source.local.entity.GameDetailLocalEntity
 import com.rivaldofez.vogames.core.data.source.remote.response.GameDetailResponse
+import com.rivaldofez.vogames.core.data.source.remote.response.GameListItem
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.core.domain.repository.IGameRepository

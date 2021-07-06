@@ -1,8 +1,9 @@
 package com.rivaldofez.vogames.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
+import com.rivaldofez.vogames.core.data.source.remote.response.subtype.*
 
-data class GameDetailResponse(
+private data class GameDetailResponse(
 
 	@field:SerializedName("added")
 	val added: Int,
@@ -23,7 +24,7 @@ data class GameDetailResponse(
 	val playtime: Int,
 
 	@field:SerializedName("platforms")
-	val platforms: List<PlatformsItem>,
+	val platforms: List<PlatformsItemDetail>,
 
 	@field:SerializedName("rating_top")
 	val ratingTop: Int,
@@ -41,7 +42,7 @@ data class GameDetailResponse(
 	val id: Int,
 
 	@field:SerializedName("parent_platforms")
-	val parentPlatforms: List<ParentPlatformsItem>,
+	val parentPlatforms: List<ParentPlatformsItemDetail>,
 
 	@field:SerializedName("reddit_name")
 	val redditName: String,
@@ -143,7 +144,7 @@ data class GameDetailResponse(
 	val suggestionsCount: Int,
 
 	@field:SerializedName("stores")
-	val stores: List<StoresItem>,
+	val stores: List<StoresItemDetail>,
 
 	@field:SerializedName("additions_count")
 	val additionsCount: Int,
@@ -160,273 +161,6 @@ data class GameDetailResponse(
 	@field:SerializedName("screenshots_count")
 	val screenshotsCount: Int,
 
-	@field:SerializedName("reactions")
-	val reactions: Reactions,
-
 	@field:SerializedName("clip")
 	val clip: Any
-)
-
-data class Platform(
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("platform")
-	val platform: Int,
-
-	@field:SerializedName("slug")
-	val slug: String
-)
-
-data class MetacriticPlatformsItem(
-
-	@field:SerializedName("metascore")
-	val metascore: Int,
-
-	@field:SerializedName("url")
-	val url: String,
-
-	@field:SerializedName("platform")
-	val platform: Platform
-)
-
-data class Requirements(
-
-	@field:SerializedName("minimum")
-	val minimum: String,
-
-	@field:SerializedName("recommended")
-	val recommended: String
-)
-
-data class Reactions(
-
-	@field:SerializedName("11")
-	val jsonMember11: Int,
-
-	@field:SerializedName("12")
-	val jsonMember12: Int,
-
-	@field:SerializedName("14")
-	val jsonMember14: Int,
-
-	@field:SerializedName("15")
-	val jsonMember15: Int,
-
-	@field:SerializedName("16")
-	val jsonMember16: Int,
-
-	@field:SerializedName("18")
-	val jsonMember18: Int,
-
-	@field:SerializedName("1")
-	val jsonMember1: Int,
-
-	@field:SerializedName("2")
-	val jsonMember2: Int,
-
-	@field:SerializedName("3")
-	val jsonMember3: Int,
-
-	@field:SerializedName("4")
-	val jsonMember4: Int,
-
-	@field:SerializedName("5")
-	val jsonMember5: Int,
-
-	@field:SerializedName("6")
-	val jsonMember6: Int,
-
-	@field:SerializedName("7")
-	val jsonMember7: Int,
-
-	@field:SerializedName("8")
-	val jsonMember8: Int,
-
-	@field:SerializedName("9")
-	val jsonMember9: Int,
-
-	@field:SerializedName("20")
-	val jsonMember20: Int,
-
-	@field:SerializedName("10")
-	val jsonMember10: Int,
-
-	@field:SerializedName("21")
-	val jsonMember21: Int
-)
-
-data class ParentPlatformsItem(
-
-	@field:SerializedName("platform")
-	val platform: Platform
-)
-
-data class StoresItem(
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("store")
-	val store: Store,
-
-	@field:SerializedName("url")
-	val url: String
-)
-
-data class PlatformsItem(
-
-	@field:SerializedName("requirements")
-	val requirements: Requirements,
-
-	@field:SerializedName("released_at")
-	val releasedAt: String,
-
-	@field:SerializedName("platform")
-	val platform: Platform
-)
-
-data class AddedByStatus(
-
-	@field:SerializedName("owned")
-	val owned: Int,
-
-	@field:SerializedName("beaten")
-	val beaten: Int,
-
-	@field:SerializedName("dropped")
-	val dropped: Int,
-
-	@field:SerializedName("yet")
-	val yet: Int,
-
-	@field:SerializedName("playing")
-	val playing: Int,
-
-	@field:SerializedName("toplay")
-	val toplay: Int
-)
-
-data class DevelopersItem(
-
-	@field:SerializedName("games_count")
-	val gamesCount: Int,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("image_background")
-	val imageBackground: String,
-
-	@field:SerializedName("slug")
-	val slug: String
-)
-
-data class GenresItem(
-
-	@field:SerializedName("games_count")
-	val gamesCount: Int,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("image_background")
-	val imageBackground: String,
-
-	@field:SerializedName("slug")
-	val slug: String
-)
-
-data class PublishersItem(
-
-	@field:SerializedName("games_count")
-	val gamesCount: Int,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("image_background")
-	val imageBackground: String,
-
-	@field:SerializedName("slug")
-	val slug: String
-)
-
-data class TagsItem(
-
-	@field:SerializedName("games_count")
-	val gamesCount: Int,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("language")
-	val language: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("image_background")
-	val imageBackground: String,
-
-	@field:SerializedName("slug")
-	val slug: String
-)
-
-data class Store(
-
-	@field:SerializedName("games_count")
-	val gamesCount: Int,
-
-	@field:SerializedName("domain")
-	val domain: String,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("image_background")
-	val imageBackground: String,
-
-	@field:SerializedName("slug")
-	val slug: String
-)
-
-data class RatingsItem(
-
-	@field:SerializedName("count")
-	val count: Int,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("title")
-	val title: String,
-
-	@field:SerializedName("percent")
-	val percent: Double
-)
-
-data class EsrbRating(
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("slug")
-	val slug: String
 )

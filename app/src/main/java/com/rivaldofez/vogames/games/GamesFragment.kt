@@ -41,6 +41,11 @@ class GamesFragment : Fragment(), GameFragmentCallback {
         if(activity != null){
             val gameAdapter = GameAdapter(this)
 
+            with(binding.rvGame){
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = gameAdapter
+            }
+
             gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
                 if(games != null){
                     when(games){
@@ -50,11 +55,6 @@ class GamesFragment : Fragment(), GameFragmentCallback {
                     }
                 }
             })
-
-            with(binding.rvGame){
-                layoutManager = GridLayoutManager(context, 2)
-                adapter = gameAdapter
-            }
 
         }
     }

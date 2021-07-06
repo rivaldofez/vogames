@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.di.FavoriteModule
 import com.rivaldofez.vogames.favorite.databinding.FragmentFavoriteBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment(), FavoriteFragmentCallback {
 
     private lateinit var binding : FragmentFavoriteBinding
     private val favoriteViewModel: FavoriteViewModel by viewModel()
@@ -30,9 +33,20 @@ class FavoriteFragment : Fragment() {
         loadKoinModules(FavoriteModule)
 
         if (activity != null){
+            val favoriteAdapter = FavoriteAdapter(this)
+
+            with(binding.rvFavoriteGame){
+                layoutManager = LinearLayoutManager(context)
+                adapter = favoriteAdapter
+            }
+
             favoriteViewModel.favoriteGames.observe(viewLifecycleOwner, { favoriteGames ->
-                Log.d("Testfa", favoriteGames.toString())
+                favoriteAdapter.setFavoriteGames(favoriteGames)
             })
         }
+    }
+
+    override fun onFavoriteItemClick(favoriteItem: DetailGame) {
+        Toast.makeText(requireContext(), favoriteItem.name, Toast.LENGTH_SHORT).show()
     }
 }

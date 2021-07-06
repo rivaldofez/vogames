@@ -12,7 +12,7 @@ data class GameDetailLocalEntity (
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Int = 0,
 
     @ColumnInfo(name = "name")
     val name: String,

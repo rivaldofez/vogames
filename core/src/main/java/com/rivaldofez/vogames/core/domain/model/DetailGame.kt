@@ -7,7 +7,19 @@ import kotlinx.parcelize.Parcelize
 data class DetailGame (
     val id: Int,
     val name: String,
+    val nameOriginal: String,
     val rating: Double,
+    val playtime: Int,
+    val released: String,
+    val platforms: String,
+    val descriptionRaw: String,
     val backgroundImage: String,
-    var isFavorite: Boolean
+    val metacritic: Int,
+    val updated: String,
+    val description: String,
+    val metacriticUrl: String,
+    val genres: String,
+    val website: String,
+    var isFavorite: Boolean = false,
+    val publishers: String
 ): Parcelable

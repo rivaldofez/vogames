@@ -4,7 +4,6 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rivaldofez.vogames.core.data.source.remote.response.subtype.*
 
 @Entity(tableName = "gamelist")
 data class GameItemLocalEntity(
@@ -39,7 +38,7 @@ data class GameItemLocalEntity(
     val name: String,
 
     @ColumnInfo(name = "updated")
-    val updated: String,
+    val updated: String
 
 
 

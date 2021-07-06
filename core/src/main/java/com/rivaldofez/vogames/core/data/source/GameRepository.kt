@@ -22,7 +22,7 @@ class GameRepository(
         object : NetworkBoundResource<List<Game>, List<GameListItem>>() {
             override fun loadFromDB(): Flow<List<Game>> {
                 return localDataSource.getRecentlyGames().map{
-                    DataMapper.mapLocalToDomain(it)
+                    DataMapper.mapListLocalToDomain(it)
                 }
             }
 
@@ -53,15 +53,20 @@ class GameRepository(
                 Log.d("Teston", loaded.toString())
                 return loaded.map {
                     if(it != null){
+                        Log.d("Tesmin", "data loaded gk null")
                         DataMapper.mapDetailLocalToDomain(it)
                     }else{
+                        Log.d("Tesmin", "data loaded null")
                         null
                     }
                 }
             }
 
-            override fun shouldFetch(data: DetailGame?): Boolean =
-                data != null
+            override fun shouldFetch(data: DetailGame?): Boolean {
+                Log.d("Tesmin", "Should fetch " + (data != null).toString())
+                return data == null
+            }
+
 
             override suspend fun createCall(): Flow<ApiResponse<GameDetailResponse>> {
                 return remoteDataSource.getDetailGame(id)

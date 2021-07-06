@@ -14,7 +14,7 @@ interface GameDao {
     fun getFavoriteGames(): Flow<List<GameDetailLocalEntity>>
 
     @Query("SELECT * FROM detailgamelist WHERE id = :id")
-    fun getDetailGame(id: Int): Flow<GameDetailLocalEntity>
+    fun getDetailGame(id: Int): Flow<GameDetailLocalEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGameList(gameListLocal: List<GameItemLocalEntity>)

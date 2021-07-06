@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class LocalDataSource(private val gameDao: GameDao) {
     fun getRecentlyGames(): Flow<List<GameItemLocalEntity>> = gameDao.getRecentlyGames()
 
-    fun getDetailGames(id: String): Flow<GameDetailLocalEntity> = gameDao.getDetailGame(id.toInt())
+    fun getDetailGames(id: String): Flow<GameDetailLocalEntity?> = gameDao.getDetailGame(id.toInt())
 
     fun getFavoriteGames(): Flow<List<GameDetailLocalEntity>> = gameDao.getFavoriteGames()
 

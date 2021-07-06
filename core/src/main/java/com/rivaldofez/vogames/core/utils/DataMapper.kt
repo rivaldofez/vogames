@@ -1,41 +1,78 @@
 package com.rivaldofez.vogames.core.utils
 
-import com.rivaldofez.core.data.source.remote.response.GameListItem
 import com.rivaldofez.vogames.core.data.source.local.entity.GameDetailLocalEntity
 import com.rivaldofez.vogames.core.data.source.local.entity.GameItemLocalEntity
 import com.rivaldofez.vogames.core.data.source.remote.response.GameDetailResponse
+import com.rivaldofez.vogames.core.data.source.remote.response.GameListItem
+import com.rivaldofez.vogames.core.data.source.remote.response.subtype.*
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.core.domain.model.Game
 
 object DataMapper {
-    fun mapResponsesToLocals(input: List<GameListItem>): List<GameItemLocalEntity> {
-        val gameList = ArrayList<GameItemLocalEntity>()
 
+    fun mapListScreenshotToString(input: List<ShortScreenshotsItem>): String =
+        input.joinToString { it.image }
+
+    fun mapListParentPlatformToString(input: List<ParentPlatformsItem>): String =
+        input.joinToString { it.platform.name }
+
+    fun mapGenresToString(input: List<GenresItem>): String =
+        input.joinToString { it.name }
+
+    fun mapListPlatformDetailToString(input: List<ParentPlatformsItemDetail>): String =
+        input.joinToString { it.platform.name }
+
+    fun mapListPublisherToString(input: List<PublishersItem>): String =
+        input.joinToString { it.name }
+
+    fun mapListResponseToLocal(input: List<GameListItem>): List<GameItemLocalEntity> {
+        val gameList = ArrayList<GameItemLocalEntity>()
         input.map {
+            val shortScreenshots = mapListScreenshotToString(it.shortScreenshots)
+            val parentPlatforms = mapListParentPlatformToString(it.parentPlatforms)
+            val genres = mapGenresToString(it.genres)
             val game = GameItemLocalEntity(
                 id = it.id,
-                added = it.added,
                 rating = it.rating,
                 metacritic = it.metacritic,
                 playtime = it.playtime,
-                ratingTop = it.ratingTop,
-                reviewsCount = it.reviewsCount,
-                reviewsTextCount = it.reviewsTextCount,
-                saturatedColor = it.saturatedColor,
-                ratingsCount = it.ratingsCount,
-                slug = it.slug,
-                released = it.released,
-                suggestionsCount = it.suggestionsCount,
+                shortScreenshots = shortScreenshots,
+                parentPlatforms = parentPlatforms,
+                genres = genres,
                 backgroundImage = it.backgroundImage,
-                tba = it.tba,
-                dominantColor = it.dominantColor,
                 name = it.name,
-                updated = it.updated,
+                updated = it.updated
             )
             gameList.add(game)
         }
         return gameList
     }
+
+    fun mapListDetailLocalToDomain(input: List<GameDetailLocalEntity>): List<DetailGame> =
+        input.map {
+            mapDetailLocalToDomain(it)
+        }
+
+    fun mapDetailResponseToLocal(input: GameDetailResponse): GameDetailLocalEntity =
+        GameDetailLocalEntity(
+            id = input.id,
+            name = input.name,
+            nameOriginal = input.nameOriginal,
+            rating = input.rating,
+            playtime = input.playtime,
+            released = input.released,
+            platforms = mapListPlatformDetailToString(input.parentPlatforms),
+            descriptionRaw = input.descriptionRaw,
+            backgroundImage = input.backgroundImage,
+            metacritic = input.metacritic,
+            updated = input.updated,
+            description = input.description,
+            metacriticUrl = input.metacriticUrl,
+            genres = mapGenresToString(input.genres),
+            website = input.website,
+            isFavorite = false,
+            publishers = mapListPublisherToString(input.publishers)
+        )
 
     fun mapLocalToDomain(input: List<GameItemLocalEntity>): List<Game> =
         input.map {
@@ -47,11 +84,6 @@ object DataMapper {
             )
         }
 
-    fun mapListDetailLocalToDomain(input: List<GameDetailLocalEntity>): List<DetailGame> =
-        input.map {
-            mapDetailLocalToDomain(it)
-        }
-
     fun mapDetailLocalToDomain(input : GameDetailLocalEntity): DetailGame =
         DetailGame(
             id = input.id,
@@ -61,48 +93,6 @@ object DataMapper {
             isFavorite = false
         )
 
-    fun mapDetailResponseToLocal(input: GameDetailResponse): GameDetailLocalEntity =
-        GameDetailLocalEntity(
-            id = input.id,
-            added = input.added,
-            nameOriginal = input.nameOriginal,
-            rating = input.rating,
-            gameSeriesCount = input.gameSeriesCount,
-            playtime = input.playtime,
-            ratingTop = input.ratingTop,
-            reviewsTextCount = input.reviewsTextCount,
-            achievementsCount = input.achievementsCount,
-            redditName = input.redditName,
-            ratingsCount = input.ratingsCount,
-            slug = input.slug,
-            released = input.released,
-            youtubeCount = input.youtubeCount,
-            moviesCount = input.moviesCount,
-            descriptionRaw = input.descriptionRaw,
-            backgroundImage = input.backgroundImage,
-            tba = input.tba,
-            dominantColor = input.dominantColor,
-            name = input.name,
-            redditDescription = input.redditDescription,
-            redditLogo = input.redditLogo,
-            updated = input.updated,
-            reviewsCount = input.reviewsCount,
-            metacritic = input.metacritic,
-            description = input.description,
-            metacriticUrl = input.metacriticUrl,
-            parentsCount = input.parentsCount,
-            creatorsCount = input.creatorsCount,
-            saturatedColor = input.saturatedColor,
-            redditUrl = input.redditUrl,
-            redditCount = input.redditCount,
-            parentAchievementsCount = input.parentAchievementsCount,
-            website = input.website,
-            suggestionsCount = input.suggestionsCount,
-            additionsCount = input.additionsCount,
-            twitchCount = input.twitchCount,
-            backgroundImageAdditional = input.backgroundImageAdditional,
-            screenshotsCount = input.screenshotsCount,
-        )
 
     fun mapDetailResponseToDomain(input: GameDetailResponse): DetailGame =
         DetailGame(

@@ -35,7 +35,7 @@ class GameRepository(
 
 
             override suspend fun saveCallResult(data: List<GameListItem>) {
-                val gameList = DataMapper.mapResponsesToLocals(data)
+                val gameList = DataMapper.mapListResponseToLocal(data)
                 localDataSource.insertGameList(gameList)
             }
         }.asFlow()
@@ -58,15 +58,6 @@ class GameRepository(
                         null
                     }
                 }
-//                if(loaded.){
-//                    Log.d("Teston", "call load")
-//                    return loaded.map {
-//                        DataMapper.mapDetailLocalToDomain(it)
-//                    }
-//                }else{
-//                    Log.d("Teston", "call null")
-//                    return flowOf(null)
-//                }
             }
 
             override fun shouldFetch(data: DetailGame?): Boolean =

@@ -3,7 +3,7 @@ package com.rivaldofez.vogames.core.data.source.remote.response
 import com.google.gson.annotations.SerializedName
 import com.rivaldofez.vogames.core.data.source.remote.response.subtype.*
 
-private data class GameDetailResponse(
+data class GameDetailResponse(
 
 	@field:SerializedName("added")
 	val added: Int,

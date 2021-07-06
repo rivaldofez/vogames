@@ -3,10 +3,9 @@ package com.rivaldofez.core.data.source.remote
 import android.util.Log
 import com.rivaldofez.core.data.source.remote.network.ApiResponse
 import com.rivaldofez.core.data.source.remote.network.ApiService
-import com.rivaldofez.core.data.source.remote.response.GameListItem
-import com.rivaldofez.core.data.source.remote.response.GamesResponse
 import com.rivaldofez.vogames.core.BuildConfig
 import com.rivaldofez.vogames.core.data.source.remote.response.GameDetailResponse
+import com.rivaldofez.vogames.core.data.source.remote.response.GameListItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

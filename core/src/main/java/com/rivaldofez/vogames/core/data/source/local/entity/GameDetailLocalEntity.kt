@@ -4,9 +4,6 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rivaldofez.vogames.core.data.source.remote.response.MetacriticPlatformsItem
-import com.rivaldofez.vogames.core.data.source.remote.response.PublishersItem
-import com.rivaldofez.vogames.core.data.source.remote.response.Reactions
 
 
 @Entity(tableName = "detailgamelist")

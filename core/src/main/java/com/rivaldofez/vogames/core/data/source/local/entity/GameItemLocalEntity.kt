@@ -26,14 +26,11 @@ data class GameItemLocalEntity(
     @ColumnInfo(name = "short_screenshots")
     val shortScreenshots: String,
 
-    @ColumnInfo(name = "platforms")
-    val platforms: String,
+    @ColumnInfo(name = "parent_platforms")
+    val parentPlatforms: String,
 
     @ColumnInfo(name = "genres")
     val genres: String,
-
-    @ColumnInfo(name = "parent_platforms")
-    val parentPlatforms: String,
 
     @ColumnInfo(name = "background_image")
     val backgroundImage: String,

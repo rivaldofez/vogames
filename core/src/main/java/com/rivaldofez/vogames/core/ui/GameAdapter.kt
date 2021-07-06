@@ -22,18 +22,6 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
         notifyDataSetChanged()
     }
 
-    companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Game>(){
-            override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val itemGamesBinding = ItemGamesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GameViewHolder(itemGamesBinding)

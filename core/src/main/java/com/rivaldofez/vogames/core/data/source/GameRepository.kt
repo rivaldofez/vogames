@@ -71,7 +71,7 @@ class GameRepository(
             }
 
             override fun shouldFetch(data: DetailGame?): Boolean =
-                true
+                data != null
 
             override suspend fun createCall(): Flow<ApiResponse<GameDetailResponse>> {
                 return remoteDataSource.getDetailGame(id)

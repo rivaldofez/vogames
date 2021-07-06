@@ -11,18 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_back_poster"
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/img_slider"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:scaleType="centerCrop"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="@color/gold"
+            app:sliderIndicatorUnselectedColor="@color/white"
+            app:sliderScrollTimeInSec="2"
+            app:sliderStartAutoCycle="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/RoundImageView"
-            tools:src="@drawable/example" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.ramijemli.percentagechartview.PercentageChartView
             android:id="@+id/chart_popularity"
@@ -30,8 +39,8 @@
             android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_back_poster"
-            app:layout_constraintEnd_toEndOf="@+id/img_back_poster"
+            app:layout_constraintBottom_toBottomOf="@+id/img_slider"
+            app:layout_constraintEnd_toEndOf="@+id/img_slider"
             app:pcv_animDuration="800"
             app:pcv_animInterpolator="anticipate_overshoot"
             app:pcv_backgroundBarColor="@color/black_700"
@@ -57,7 +66,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_back_poster" />
+            app:layout_constraintTop_toBottomOf="@+id/img_slider" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_platform"

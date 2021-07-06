@@ -19,4 +19,6 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
     implementation "com.ramijemli.percentagechartview:percentagechartview:$percentageChartVersion"
+
+    implementation "com.github.smarteist:autoimageslider:$imageSliderVersion"
 }

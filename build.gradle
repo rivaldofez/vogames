@@ -26,7 +26,7 @@ buildscript {
         lifecycle_version = "2.2.0"
 
         koin_version = "2.1.6"
-
+        imageSliderVersion = "1.4.0"
         //navigate
         navVersion = "2.3.5"
         legacySupportVersion = "1.0.0"
@@ -51,6 +51,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url  'https://jitpack.io' }
     }
 }
 

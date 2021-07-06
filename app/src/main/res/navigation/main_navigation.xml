@@ -11,14 +11,14 @@
         android:label="fragment_games"
         tools:layout="@layout/fragment_games" >
         <action
-            android:id="@+id/action_gamesFragment_to_favoriteFragment2"
-            app:destination="@id/favoriteFragment" />
-        <action
             android:id="@+id/action_gamesFragment_to_aboutFragment2"
             app:destination="@id/aboutFragment" />
         <action
             android:id="@+id/action_gamesFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_gamesFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -29,7 +29,7 @@
             android:id="@+id/action_aboutFragment_to_gamesFragment2"
             app:destination="@id/gamesFragment" />
         <action
-            android:id="@+id/action_aboutFragment_to_favoriteFragment2"
+            android:id="@+id/action_aboutFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
@@ -37,12 +37,16 @@
         android:name="com.rivaldofez.vogames.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
+        <deepLink app:uri="favorite://favoriteFragment" />
         <action
-            android:id="@+id/action_favoriteFragment_to_gamesFragment2"
+            android:id="@+id/action_favoriteFragment_to_gamesFragment"
             app:destination="@id/gamesFragment" />
         <action
-            android:id="@+id/action_favoriteFragment_to_aboutFragment2"
+            android:id="@+id/action_favoriteFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"

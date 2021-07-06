@@ -7,11 +7,12 @@ import com.rivaldofez.vogames.games.GamesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+
 val useCaseModule = module {
     factory<GameUseCase> { GameInteractor(get()) }
 }
 
 val viewModelModule = module {
-    viewModel{GamesViewModel(get())}
+    viewModel{ GamesViewModel(get()) }
     viewModel{DetailGameViewModel(get())}
 }

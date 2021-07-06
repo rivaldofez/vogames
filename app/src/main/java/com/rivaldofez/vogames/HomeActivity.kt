@@ -1,11 +1,12 @@
 package com.rivaldofez.vogames
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.findNavController
 import com.rivaldofez.vogames.databinding.ActivityHomeBinding
-import com.rivaldofez.vogames.favorite.FavoriteFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding

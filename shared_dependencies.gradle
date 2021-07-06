@@ -21,4 +21,9 @@ dependencies {
     implementation "com.ramijemli.percentagechartview:percentagechartview:$percentageChartVersion"
 
     implementation "com.github.smarteist:autoimageslider:$imageSliderVersion"
+
+    //navigate
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
 }

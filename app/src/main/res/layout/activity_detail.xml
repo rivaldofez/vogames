@@ -70,7 +70,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/chart_popularity"
+            app:layout_constraintEnd_toStartOf="@+id/tv_metacritic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cg_platform" />
 
@@ -83,7 +83,7 @@
             android:layout_marginEnd="16dp"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/chart_popularity"
+            app:layout_constraintEnd_toStartOf="@+id/tv_metacritic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_release_title"
             tools:text="11 January 2021"/>
@@ -173,13 +173,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintHeight_min="25dp"
+            android:padding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_genre_title">
-
 
         </com.google.android.material.chip.ChipGroup>
 

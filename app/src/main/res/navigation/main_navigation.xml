@@ -55,6 +55,11 @@
         tools:layout="@layout/activity_detail" >
         <argument
             android:name="gameId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="screenshots"
+            app:argType="string"
+            app:nullable="true" />
     </activity>
 </navigation>

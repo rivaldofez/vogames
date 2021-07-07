@@ -8,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.rivaldofez.vogames.core.R
 import com.rivaldofez.vogames.core.databinding.ItemGamesBinding
 import com.rivaldofez.vogames.core.domain.model.Game
+import com.rivaldofez.vogames.core.utils.ViewHelper
 
 
 class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
@@ -25,20 +26,29 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
         return GameViewHolder(itemGamesBinding)
     }
 
+    @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = listGame[position]
         holder.bind(game)
     }
 
+    override fun getItemCount(): Int = listGame.size
+
     inner class GameViewHolder(private val binding: ItemGamesBinding): RecyclerView.ViewHolder(binding.root) {
+        @ExperimentalStdlibApi
         fun bind(game: Game){
             with(binding){
-                tvTitle.text = game.name
-                if(game.rating != null){
-                    ratingGame.rating = game.rating.toFloat()
+                cgPlatform.removeAllViews()
+                val listPlatform = game.parentPlatforms.split(",").map { it.lowercase().trim() }
+                listPlatform.map {
+                    val itemPlatform = ViewHelper.generatePlatform(it,itemView.context, 13)
+                    if(itemPlatform != null){
+                        cgPlatform.addView(itemPlatform)
+                    }
                 }
-
-
+                tvTitle.text = game.name
+                ratingGame.rating = game.rating.toFloat()
+                tvMetacritic.text = game.metacritic.toString()
                 cvItemGame.setOnClickListener{callback.onGameClick(game)}
 
                 Glide.with(itemView.context).load(game.backgroundImage)
@@ -48,7 +58,4 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
         }
 
     }
-
-    override fun getItemCount(): Int = listGame.size
-
 }

@@ -81,9 +81,5 @@
             app:bt_icon="@drawable/ic_about"
             app:bt_shape="@drawable/bg_chip_navbar"
             app:bt_title="Favorite" />
-
-        <!-- Add more child items here - max upto 5 -->
-
     </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

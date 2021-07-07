@@ -5,18 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.core.ui.GameAdapter
 import com.rivaldofez.vogames.core.ui.GameFragmentCallback
 import com.rivaldofez.vogames.databinding.FragmentGamesBinding
-import com.rivaldofez.vogames.detail.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -24,14 +19,15 @@ class GamesFragment : Fragment(), GameFragmentCallback {
 
     private val gamesViewModel: GamesViewModel by viewModel()
 
-    private lateinit var binding: FragmentGamesBinding
+    private var _binding: FragmentGamesBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentGamesBinding.inflate(inflater, container, false)
+        _binding = FragmentGamesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,27 +37,47 @@ class GamesFragment : Fragment(), GameFragmentCallback {
         if(activity != null){
             val gameAdapter = GameAdapter(this)
 
-            with(binding.rvGame){
-                layoutManager = GridLayoutManager(context, 2)
-                adapter = gameAdapter
-            }
-
             gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
                 if(games != null){
                     when(games){
+                        is Resource.Loading -> showLoading(true)
                         is Resource.Success -> {
                             gameAdapter.setGames(games.data)
+                            showLoading(false)
+                        }
+                        is Resource.Error -> {
+                            showLoading(false)
                         }
                     }
                 }
             })
 
+            with(binding.rvGame){
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = gameAdapter
+            }
         }
     }
 
     override fun onGameClick(game: Game) {
-//        Toast.makeText(requireContext(), game.name, Toast.LENGTH_SHORT).show()
-        val gotoDetailActivity = GamesFragmentDirections.actionGamesFragmentToDetailActivity(game.id.toString())
+        val gotoDetailActivity = GamesFragmentDirections.actionGamesFragmentToDetailActivity(
+                game.id.toString(), game.shortScreenshots
+        )
         findNavController().navigate(gotoDetailActivity)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun showLoading(state: Boolean){
+        if(state){
+            binding.rvGame.visibility = View.GONE
+            binding.loading.visibility = View.VISIBLE
+        }else{
+            binding.loading.visibility = View.GONE
+            binding.rvGame.visibility = View.VISIBLE
+        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.DetailGame
@@ -62,11 +63,18 @@ class DetailActivity : AppCompatActivity() {
     @ExperimentalStdlibApi
     private fun setViewContent(detailGame: DetailGame){
         with(binding){
+            cgPlatform.removeAllViews()
             detailGame.platforms.split(",").map{
                 val itemPlatform = ViewHelper.generatePlatform(it.lowercase().trim(), this@DetailActivity,20)
                 if(itemPlatform != null){
                     cgPlatform.addView(itemPlatform)
                 }
+            }
+            cgGenres.removeAllViews()
+            detailGame.genres.split(",").map {
+                cgGenres.addView(
+                        ViewHelper.generateChipItem(it, this@DetailActivity)
+                )
             }
             tvGameName.text = detailGame.name
             tvPublisher.text = detailGame.publishers
@@ -74,16 +82,25 @@ class DetailActivity : AppCompatActivity() {
             tvRelease.text = detailGame.released
             chartPopularity.setProgress((detailGame.rating.toFloat()/5F) * 100, true)
             tvAbout.text = detailGame.descriptionRaw.replace("\n", "").trim()
-            addGenreChild()
+
+            btnFavorite.apply {
+                setStateFavoriteIcon(detailGame.isFavorite)
+                setOnClickListener {
+                    detailGameViewModel.setFavoriteGame(detailGame, !detailGame.isFavorite)
+                    setStateFavoriteIcon(detailGame.isFavorite)
+                }
+            }
         }
     }
 
-    private fun addGenreChild() {
-        val chipItem = Chip(this, null, )
-        chipItem.setChipDrawable(ChipDrawable.createFromAttributes(this,null,0, R.style.ChipItem))
-//        chipItem.isCheckable = false
-        chipItem.setTextColor(ContextCompat.getColor(this,R.color.white))
-        chipItem.text = "Testimoni"
-        binding.cgGenres.addView(chipItem)
+    private fun setStateFavoriteIcon(isFavorite: Boolean){
+        if(isFavorite)
+            binding.btnFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(this, R.drawable.ic_favorite)
+            )
+        else
+            binding.btnFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(this, R.drawable.ic_favorite_unfilled)
+            )
     }
 }

@@ -4,4 +4,15 @@
         <item name="colorControlNormal">@color/gold</item>
         <item name="colorControlActivated">@color/duskgray</item>
     </style>
+
+    <style name="ChipItem" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:clickable">false</item>
+        <item name="chipBackgroundColor">@color/jet</item>
+        <item name="chipMinHeight">24dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="textEndPadding">6dp</item>
+        <item name="textStartPadding">6dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
 </resources>

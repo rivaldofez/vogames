@@ -16,6 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -28,10 +31,7 @@
             app:sliderIndicatorSelectedColor="@color/gold"
             app:sliderIndicatorUnselectedColor="@color/white"
             app:sliderScrollTimeInSec="2"
-            app:sliderStartAutoCycle="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:sliderStartAutoCycle="true" />
 
         <TextView
             android:id="@+id/tv_game_name"
@@ -41,36 +41,23 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:textAlignment="center"
-            android:text="Battle Field"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_slider" />
+            app:layout_constraintTop_toBottomOf="@+id/img_slider"
+            tools:text="Harvest Moon "/>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_platform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintHeight_min="20dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_game_name">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_windows"
-                app:tint="@color/white" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_playstation"
-                app:tint="@color/white" />
-
-        </com.google.android.material.chip.ChipGroup>
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_name"/>
 
         <TextView
             android:id="@+id/tv_release_title"
@@ -79,7 +66,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="16dp"
-            android:text="Release Date"
+            android:text="@string/plc_release_date"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -94,12 +81,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:text="Jun 11, 2021"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/chart_popularity"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_release_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_release_title"
+            tools:text="11 January 2021"/>
 
         <TextView
             android:id="@+id/tv_metacritic"
@@ -109,13 +96,13 @@
             android:background="@drawable/bg_meta_detail"
             android:gravity="center"
             android:padding="6dp"
-            android:text="96"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/chart_popularity"
-            app:layout_constraintTop_toTopOf="@+id/tv_release_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_release_title"
+            tools:text="96"/>
 
         <com.ramijemli.percentagechartview.PercentageChartView
             android:id="@+id/chart_popularity"
@@ -130,12 +117,12 @@
             app:pcv_backgroundBarThickness="6dp"
             app:pcv_mode="ring"
             app:pcv_orientation="clockwise"
-            app:pcv_progress="99"
-            app:pcv_textSize="16sp"
-            app:pcv_textStyle="bold"
+            app:pcv_progress="0"
             app:pcv_progressBarThickness="5dp"
             app:pcv_progressColor="@color/gold"
-            app:pcv_startAngle="270" />
+            app:pcv_startAngle="270"
+            app:pcv_textSize="16sp"
+            app:pcv_textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_about_title"
@@ -144,10 +131,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="About"
-            android:textStyle="bold"
-            android:textSize="16sp"
+            android:text="@string/plc_about"
             android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_release" />
@@ -159,12 +146,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:text="Lorem ipsum dolor sit amet"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_about_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_about_title"
+            tools:text="Lorem ipsum dolor sit amet"/>
 
         <TextView
             android:id="@+id/tv_genre_title"
@@ -173,10 +160,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Genre"
-            android:textStyle="bold"
-            android:textSize="16sp"
+            android:text="@string/plc_genre"
             android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_about" />
@@ -188,35 +175,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
+            app:layout_constraintHeight_min="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_genre_title">
 
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:text="Testimoni"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:chipBackgroundColor="@color/black_500"
-                app:chipMinHeight="24dp"
-                app:chipMinTouchTargetSize="0dp"
-                app:textEndPadding="6dp"
-                app:textStartPadding="6dp" />
 
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:text="Pote"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:chipBackgroundColor="@color/black_500"
-                app:chipMinHeight="24dp"
-                app:chipMinTouchTargetSize="0dp"
-                app:textEndPadding="6dp"
-                app:textStartPadding="6dp" />
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
@@ -226,10 +190,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Publisher"
-            android:textStyle="bold"
-            android:textSize="16sp"
+            android:text="@string/plc_publisher"
             android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cg_genres" />
@@ -241,12 +205,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:text="Sony Interactive Entertainment"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_publisher_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_publisher_title"
+            tools:text="Sony Interactive Entertainment"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_detail"
@@ -255,13 +219,40 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/black_500"
-            android:text="Show Metacritics"
+            android:text="@string/plc_show_metacritics"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_publisher" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ic_favorite_unfilled"
+            android:contentDescription="@string/cd_icon"
+            app:backgroundTint="@color/gold"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/white" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:SpinKit_Color="@color/black_200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </ScrollView>

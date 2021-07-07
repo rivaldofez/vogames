@@ -49,6 +49,7 @@ class DetailActivity : AppCompatActivity() {
                         binding.tvGameName.text = detailGame.data?.name
                         binding.tvAbout.text = detailGame.data?.rating.toString()
                         binding.tvPublisher.text = detailGame.data?.backgroundImage
+                        binding.chartPopularity.setProgress(55F, true)
 
                         detailGame.data?.backgroundImage?.let { Log.d("Teston", it) }
                         detailGame.data?.let { Log.d("Teston", it.name) }

@@ -1,29 +1,28 @@
 dependencies {
+    //core UI
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_version"
 
+    //UI extension
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
     implementation "com.github.ybq:Android-SpinKit:$spinkit_version"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.github.smarteist:autoimageslider:$imageSliderVersion"
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
 
     //koin
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
 
-    //paging
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
-
-    implementation "com.ramijemli.percentagechartview:percentagechartview:$percentageChartVersion"
-
-    implementation "com.github.smarteist:autoimageslider:$imageSliderVersion"
-
-    //navigate
-    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
+    //test
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_version"
 }

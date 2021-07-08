@@ -1,9 +1,5 @@
 package com.rivaldofez.vogames.core.domain.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class DetailGame (
     val id: Int,
     val name: String,
@@ -23,4 +19,4 @@ data class DetailGame (
     var isFavorite: Boolean = false,
     val publishers: String,
     var screenshots: String?,
-): Parcelable
+)

@@ -1,8 +1,8 @@
 package com.rivaldofez.vogames.core.di
 
 import androidx.room.Room
-import com.rivaldofez.core.data.source.remote.RemoteDataSource
-import com.rivaldofez.core.data.source.remote.network.ApiService
+import com.rivaldofez.vogames.core.data.source.remote.RemoteDataSource
+import com.rivaldofez.vogames.core.data.source.remote.network.ApiService
 import com.rivaldofez.vogames.core.data.source.GameRepository
 import com.rivaldofez.vogames.core.data.source.local.LocalDataSource
 import com.rivaldofez.vogames.core.data.source.local.room.GameDatabase

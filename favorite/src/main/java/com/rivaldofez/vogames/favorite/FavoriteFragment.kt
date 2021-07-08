@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.di.FavoriteModule
+import com.rivaldofez.vogames.core.R
 import com.rivaldofez.vogames.favorite.databinding.FragmentFavoriteBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -40,6 +42,7 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback {
             }
             favoriteViewModel.favoriteGames.observe(viewLifecycleOwner, { favoriteGames ->
                 favoriteAdapter.setFavoriteGames(favoriteGames)
+                binding.rvFavoriteGame.scheduleLayoutAnimation()
             })
         }
     }

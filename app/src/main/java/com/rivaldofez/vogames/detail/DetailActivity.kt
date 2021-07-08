@@ -19,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private val detailGameViewModel: DetailGameViewModel by viewModel()
 
-    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -52,12 +51,11 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    @ExperimentalStdlibApi
     private fun setViewContent(detailGame: DetailGame){
         with(binding){
             cgPlatform.removeAllViews()
             detailGame.platforms.split(",").map{
-                val itemPlatform = ViewHelper.generatePlatform(it.lowercase().trim(), this@DetailActivity,20)
+                val itemPlatform = ViewHelper.generatePlatform(it.trim(), this@DetailActivity,20)
                 if(itemPlatform != null){
                     cgPlatform.addView(itemPlatform)
                 }

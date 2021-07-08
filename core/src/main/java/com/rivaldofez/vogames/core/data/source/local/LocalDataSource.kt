@@ -23,6 +23,6 @@ class LocalDataSource(private val gameDao: GameDao) {
     
     fun setScreenshot(screenshots: String, id: String) = gameDao.setScreenshot(screenshots, id.toInt())
 
-    suspend fun getSearchNameResult(keyword: String) = gameDao.getSearchNameResult("%$keyword%")
+    suspend fun getSearchNameResult(query: String) = gameDao.getSearchNameResult("%$query%")
 
 }

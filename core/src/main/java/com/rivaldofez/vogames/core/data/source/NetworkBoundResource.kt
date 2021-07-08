@@ -1,6 +1,6 @@
 package com.rivaldofez.vogames.core.data.source
 
-import com.rivaldofez.core.data.source.remote.network.ApiResponse
+import com.rivaldofez.vogames.core.data.source.remote.network.ApiResponse
 import kotlinx.coroutines.flow.*
 
 abstract class NetworkBoundResource<ResultType, RequestType> {

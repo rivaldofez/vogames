@@ -1,35 +1,31 @@
 package com.rivaldofez.vogames.games
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.core.ui.GameAdapter
 import com.rivaldofez.vogames.core.ui.GameFragmentCallback
 import com.rivaldofez.vogames.databinding.FragmentGamesBinding
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
-class GamesFragment : Fragment(), GameFragmentCallback {
+@ExperimentalCoroutinesApi
+@FlowPreview
+class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextListener {
 
     private val gamesViewModel: GamesViewModel by viewModel()
-
     private var _binding: FragmentGamesBinding? = null
     private val binding get() = _binding!!
-
+    private val gameAdapter = GameAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,58 +39,43 @@ class GamesFragment : Fragment(), GameFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
-//            val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//            binding.searchField.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-//            binding.searchField.queryHint = "Masukan Kata Kunci"
-//            binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//                override fun onQueryTextSubmit(query: String?): Boolean {
-//
-//                    return true
-//                }
-//                override fun onQueryTextChange(newText: String?): Boolean {
-//                    return false
-//                }
-//            })
-
-            binding.searchField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    Log.d("Teston", "Submitt")
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    lifecycleScope.launch{
-                        newText?.let { gamesViewModel.queryChannel.send(it) }
-                    }
-                    return false
-                }
-            })
-
-            gamesViewModel.searchResult.observe(viewLifecycleOwner, Observer { games ->
-                Log.d("Teston", games.toString())
-            })
-
-            val gameAdapter = GameAdapter(this)
-            gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
-                if(games != null){
-                    when(games){
-                        is Resource.Loading -> showLoading(true)
-                        is Resource.Success -> {
-                            gameAdapter.setGames(games.data)
-                            showLoading(false)
-                        }
-                        is Resource.Error -> {
-                            showLoading(false)
-                        }
-                    }
-                }
-            })
+            callObserveGames()
+            binding.searchField.setOnQueryTextListener(this)
 
             with(binding.rvGame){
                 layoutManager = GridLayoutManager(context, 2)
                 adapter = gameAdapter
             }
         }
+    }
+
+    private fun callObserveGames(){
+        gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
+            Log.d("Teston", "call games")
+            if(games != null){
+                when(games){
+                    is Resource.Loading -> showLoading(true)
+                    is Resource.Success -> {
+                        gameAdapter.setGames(games.data)
+                        binding.rvGame.scheduleLayoutAnimation()
+                        showLoading(false)
+                    }
+                    is Resource.Error -> {
+                        showLoading(false)
+                    }
+                }
+            }
+        })
+
+    }
+
+    private fun callObserveSearch(){
+        gamesViewModel.searchResult.observe(viewLifecycleOwner, { games ->
+            if(games != null){
+                gameAdapter.setGames(games)
+                binding.rvGame.scheduleLayoutAnimation()
+            }
+        })
     }
 
     override fun onGameClick(game: Game) {
@@ -118,4 +99,27 @@ class GamesFragment : Fragment(), GameFragmentCallback {
             binding.rvGame.visibility = View.VISIBLE
         }
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (!newText.isNullOrEmpty()) {
+            lifecycleScope.launch{
+                newText.let { gamesViewModel.queryChannel.send(it) }
+            }
+            callObserveSearch()
+        }else{
+            gamesViewModel.searchResult.removeObservers(viewLifecycleOwner)
+            callObserveGames()
+        }
+        return false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        binding.searchField.setOnQueryTextListener(this)
+    }
+
 }

@@ -17,5 +17,5 @@ interface GameUseCase {
 
     fun setScreenshot(screenshot: String, id: String)
 
-    suspend fun getSearchNameResult(keyword: String): List<Game>?
+    suspend fun getSearchNameResult(query: String): List<Game>?
 }

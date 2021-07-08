@@ -1,12 +1,5 @@
 package com.rivaldofez.vogames.core.domain.model
 
-import android.os.Parcelable
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class Game (
     val id: Int,
     val rating: Double,
@@ -18,4 +11,4 @@ data class Game (
     val backgroundImage: String,
     val name: String,
     val updated: String
-): Parcelable
+)

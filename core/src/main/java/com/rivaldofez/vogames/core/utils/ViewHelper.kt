@@ -15,32 +15,44 @@ object ViewHelper {
         val item = ImageView(context)
         item.layoutParams  = ViewGroup.LayoutParams(size.toPx(context), size.toPx(context))
 
-        if(platform.contains("pc") || platform.contains("window")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_windows))
-            return item
-        }else if(platform.contains("xbox")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_xbox))
-            return item
-        }else if(platform.contains("playstation")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_playstation))
-            return item
-        }else if(platform.contains("linux")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_linux))
-            return item
-        }else if(platform.contains("browser")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_browser))
-            return item
-        }else if(platform.contains("ios")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_ios))
-            return item
-        }else if(platform.contains("apple")){
-            item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_apple))
-            return item
-        }else if(platform.contains("nintendo")) {
-            item.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_nintendo))
-            return item
-        }else{
-            return null
+        when(platform){
+            "PC" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_windows))
+                return item
+            }
+            "Xbox" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_xbox))
+                return item
+            }
+            "PlayStation" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_playstation))
+                return item
+            }
+            "Linux" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_linux))
+                return item
+            }
+            "Browser" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_browser))
+                return item
+            }
+            "iOS" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_ios))
+                return item
+            }
+            "Apple Macintosh" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context,R.drawable.ic_apple))
+                return item
+            }
+            "Nintendo" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_nintendo))
+                return item
+            }
+            "Android" -> {
+                item.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_android))
+                return item
+            }
+            else -> return null
         }
     }
 

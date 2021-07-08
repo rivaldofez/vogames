@@ -1,4 +1,4 @@
-package com.rivaldofez.core.data.source.remote.network
+package com.rivaldofez.vogames.core.data.source.remote.network
 
 import com.rivaldofez.vogames.core.data.source.remote.response.GameDetailResponse
 import com.rivaldofez.vogames.core.data.source.remote.response.GamesResponse
@@ -17,5 +17,5 @@ interface ApiService {
     suspend fun getDetailGame(
         @Path("id") id: String,
         @Query("key") key: String
-    ): GameDetailResponse
+    ): GameDetailResponse?
 }

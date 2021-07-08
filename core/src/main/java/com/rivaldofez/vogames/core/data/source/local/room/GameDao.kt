@@ -28,6 +28,6 @@ interface GameDao {
     @Query("UPDATE detailgamelist set screenshots = :screenshots WHERE id = :id")
     fun setScreenshot(screenshots: String, id: Int)
 
-    @Query("SELECT * FROM gamelist WHERE name like :keyword")
-    suspend fun getSearchNameResult(keyword: String): List<GameItemLocalEntity>
+    @Query("SELECT * FROM gamelist WHERE name like :query")
+    suspend fun getSearchNameResult(query: String): List<GameItemLocalEntity>
 }

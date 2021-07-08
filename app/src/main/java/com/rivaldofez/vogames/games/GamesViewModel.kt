@@ -2,7 +2,6 @@ package com.rivaldofez.vogames.games
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.core.domain.usecase.GameUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -18,8 +17,8 @@ class GamesViewModel(private val gameUseCase: GameUseCase) : ViewModel() {
     val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
 
     val searchResult = queryChannel.asFlow()
-            .debounce(300)
             .distinctUntilChanged()
+            .debounce(300)
             .filter {
                 it.trim().isNotEmpty()
             }

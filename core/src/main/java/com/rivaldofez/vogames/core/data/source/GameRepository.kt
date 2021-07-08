@@ -1,8 +1,7 @@
 package com.rivaldofez.vogames.core.data.source
 
-import android.util.Log
-import com.rivaldofez.core.data.source.remote.RemoteDataSource
-import com.rivaldofez.core.data.source.remote.network.ApiResponse
+import com.rivaldofez.vogames.core.data.source.remote.RemoteDataSource
+import com.rivaldofez.vogames.core.data.source.remote.network.ApiResponse
 import com.rivaldofez.vogames.core.data.source.local.LocalDataSource
 import com.rivaldofez.vogames.core.data.source.remote.response.GameDetailResponse
 import com.rivaldofez.vogames.core.data.source.remote.response.GameListItem
@@ -14,9 +13,9 @@ import com.rivaldofez.vogames.core.utils.DataMapper
 import kotlinx.coroutines.flow.*
 
 class GameRepository(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+        private val remoteDataSource: RemoteDataSource,
+        private val localDataSource: LocalDataSource,
+        private val appExecutors: AppExecutors
 ): IGameRepository {
     override fun getRecentlyGames(): Flow<Resource<List<Game>>> =
         object : NetworkBoundResource<List<Game>, List<GameListItem>>() {
@@ -47,15 +46,6 @@ class GameRepository(
     }
 
     override suspend fun getSearchNameResult(keyword: String): List<Game> {
-//        var result: List<Game>? = null
-//        appExecutors.diskIO().execute{
-//            val load = localDataSource.getSearchNameResult(keyword)
-//            if(load != null){
-//                result = DataMapper.mapListLocalToDomain(load)
-//            }
-//        }
-//        return result
-
         return DataMapper.mapListLocalToDomain(localDataSource.getSearchNameResult(keyword))
     }
 
@@ -63,27 +53,20 @@ class GameRepository(
         object: NetworkBoundResource<DetailGame?, GameDetailResponse>(){
             override fun loadFromDB(): Flow<DetailGame?> {
                 val loaded = localDataSource.getDetailGames(id)
-                Log.d("Teston", loaded.toString())
                 return loaded.map {
                     if(it != null){
-                        Log.d("Tesmin", "data loaded gk null")
                         DataMapper.mapDetailLocalToDomain(it)
                     }else{
-                        Log.d("Tesmin", "data loaded null")
                         null
                     }
                 }
             }
 
-            override fun shouldFetch(data: DetailGame?): Boolean {
-                Log.d("Tesmin", "Should fetch " + (data != null).toString())
-                return data == null
-            }
+            override fun shouldFetch(data: DetailGame?): Boolean =
+                data == null
 
-
-            override suspend fun createCall(): Flow<ApiResponse<GameDetailResponse>> {
-                return remoteDataSource.getDetailGame(id)
-            }
+            override suspend fun createCall(): Flow<ApiResponse<GameDetailResponse>> =
+                remoteDataSource.getDetailGame(id)
 
             override suspend fun saveCallResult(data: GameDetailResponse) {
                 val dataMapped = DataMapper.mapDetailResponseToLocal(data)

@@ -12,7 +12,6 @@ class SliderAdapter: SliderViewAdapter<SliderAdapter.Holder>() {
     private val listImages = ArrayList<String>()
 
     fun setImages(images: List<String>){
-        if(images == null) return
         this.listImages.clear()
         this.listImages.addAll(images)
         notifyDataSetChanged()

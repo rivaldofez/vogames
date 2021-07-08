@@ -46,6 +46,19 @@ class GameRepository(
         }
     }
 
+    override suspend fun getSearchNameResult(keyword: String): List<Game> {
+//        var result: List<Game>? = null
+//        appExecutors.diskIO().execute{
+//            val load = localDataSource.getSearchNameResult(keyword)
+//            if(load != null){
+//                result = DataMapper.mapListLocalToDomain(load)
+//            }
+//        }
+//        return result
+
+        return DataMapper.mapListLocalToDomain(localDataSource.getSearchNameResult(keyword))
+    }
+
     override fun getDetailGame(id: String): Flow<Resource<DetailGame?>> =
         object: NetworkBoundResource<DetailGame?, GameDetailResponse>(){
             override fun loadFromDB(): Flow<DetailGame?> {

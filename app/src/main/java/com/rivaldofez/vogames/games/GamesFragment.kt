@@ -1,17 +1,25 @@
 package com.rivaldofez.vogames.games
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.core.ui.GameAdapter
 import com.rivaldofez.vogames.core.ui.GameFragmentCallback
 import com.rivaldofez.vogames.databinding.FragmentGamesBinding
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -35,8 +43,38 @@ class GamesFragment : Fragment(), GameFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null){
-            val gameAdapter = GameAdapter(this)
+//            val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//            binding.searchField.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+//            binding.searchField.queryHint = "Masukan Kata Kunci"
+//            binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//
+//                    return true
+//                }
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    return false
+//                }
+//            })
 
+            binding.searchField.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    Log.d("Teston", "Submitt")
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    lifecycleScope.launch{
+                        newText?.let { gamesViewModel.queryChannel.send(it) }
+                    }
+                    return false
+                }
+            })
+
+            gamesViewModel.searchResult.observe(viewLifecycleOwner, Observer { games ->
+                Log.d("Teston", games.toString())
+            })
+
+            val gameAdapter = GameAdapter(this)
             gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
                 if(games != null){
                     when(games){

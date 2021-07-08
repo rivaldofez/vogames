@@ -15,4 +15,11 @@
         <item name="android:textSize">12sp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
+
+    <style name="Searchview">
+        <item name="android:textColorHint">@color/duskgray</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="iconTint">@color/white</item>
+    </style>
 </resources>

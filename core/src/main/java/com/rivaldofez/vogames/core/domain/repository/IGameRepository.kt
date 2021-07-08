@@ -15,4 +15,6 @@ interface IGameRepository {
     fun setFavoriteGame(detailGame: DetailGame, state: Boolean)
 
     fun setScreenshot(screenshot: String, id: String)
+
+    suspend fun getSearchNameResult(keyword: String): List<Game>
 }

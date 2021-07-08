@@ -40,7 +40,7 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
 
         if(activity != null){
             callObserveGames()
-            binding.searchField.setOnQueryTextListener(this)
+            binding.layoutSearch.searchField.setOnQueryTextListener(this)
 
             with(binding.rvGame){
                 layoutManager = GridLayoutManager(context, 2)
@@ -93,9 +93,9 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
     private fun showLoading(state: Boolean){
         if(state){
             binding.rvGame.visibility = View.GONE
-            binding.loading.visibility = View.VISIBLE
+            binding.layoutLoading.loading.visibility = View.VISIBLE
         }else{
-            binding.loading.visibility = View.GONE
+            binding.layoutLoading.loading.visibility = View.GONE
             binding.rvGame.visibility = View.VISIBLE
         }
     }
@@ -119,7 +119,7 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        binding.searchField.setOnQueryTextListener(this)
+        binding.layoutSearch.searchField.setOnQueryTextListener(this)
     }
 
 }

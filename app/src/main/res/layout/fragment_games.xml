@@ -7,25 +7,11 @@
     android:background="@color/black_700"
     tools:context=".games.GamesFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_field"
+    <include
+        android:id="@+id/layout_search"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:queryBackground="@android:color/transparent"
-        android:background="@drawable/bg_spinner"
-        android:theme="@style/Searchview"
-        app:queryHint="Masukan Keyword"
-        app:iconifiedByDefault="false"
-        app:closeIcon="@drawable/ic_close"
-        app:searchIcon="@drawable/ic_search_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name" />
+        layout="@layout/item_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_game"
@@ -36,20 +22,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_field"
+        app:layout_constraintTop_toBottomOf="@+id/layout_search"
         app:spanCount="1"
         tools:listitem="@layout/item_games" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:SpinKit_Color="@color/black_200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/layout_loading"
+        layout="@layout/item_loading"/>
+
+    <include
+        android:id="@+id/layout_message"
+        layout="@layout/item_message"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

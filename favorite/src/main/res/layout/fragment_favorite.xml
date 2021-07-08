@@ -6,32 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/black_700">
 
-    <Spinner
-        android:id="@+id/sv_name"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        android:text="Sort By"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_game"
@@ -42,8 +21,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_name"
-        tools:listitem="@layout/item_game_favorite"/>
+        app:layout_constraintTop_toBottomOf="@+id/layout_search"
+        tools:listitem="@layout/item_game_favorite" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/loading"

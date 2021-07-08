@@ -21,5 +21,6 @@ data class DetailGame (
     val genres: String,
     val website: String,
     var isFavorite: Boolean = false,
-    val publishers: String
+    val publishers: String,
+    var screenshots: String?,
 ): Parcelable

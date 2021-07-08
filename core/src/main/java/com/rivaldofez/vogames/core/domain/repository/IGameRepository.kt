@@ -13,4 +13,6 @@ interface IGameRepository {
     fun getFavoriteGames(): Flow<List<DetailGame>>
 
     fun setFavoriteGame(detailGame: DetailGame, state: Boolean)
+
+    fun setScreenshot(screenshot: String, id: String)
 }

@@ -80,6 +80,6 @@
             app:bt_colorInactive="@color/duskgray"
             app:bt_icon="@drawable/ic_about"
             app:bt_shape="@drawable/bg_chip_navbar"
-            app:bt_title="Favorite" />
+            app:bt_title="About" />
     </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 </androidx.constraintlayout.widget.ConstraintLayout>

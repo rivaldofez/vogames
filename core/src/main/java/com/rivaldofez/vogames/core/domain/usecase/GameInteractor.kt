@@ -16,4 +16,5 @@ class GameInteractor(private val gameRepository: IGameRepository): GameUseCase {
     }
     override fun getFavoriteGames(): Flow<List<DetailGame>> = gameRepository.getFavoriteGames()
     override fun setFavoriteGame(detailGame: DetailGame, state: Boolean) = gameRepository.setFavoriteGame(detailGame, state)
+    override fun setScreenshot(screenshot: String, id: String) = gameRepository.setScreenshot(screenshot, id)
 }

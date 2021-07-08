@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.rivaldofez.vogames.core.R
 import com.rivaldofez.vogames.core.domain.model.DetailGame
+import com.rivaldofez.vogames.core.utils.ViewHelper
 import com.rivaldofez.vogames.favorite.databinding.ItemGameFavoriteBinding
 
 class FavoriteAdapter(private val callback: FavoriteFragmentCallback): RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
@@ -24,6 +25,7 @@ class FavoriteAdapter(private val callback: FavoriteFragmentCallback): RecyclerV
         return FavoriteViewHolder(itemFavoriteBinding)
     }
 
+    @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val favoriteGame = listFavoriteGames[position]
         holder.bind(favoriteGame)
@@ -32,9 +34,22 @@ class FavoriteAdapter(private val callback: FavoriteFragmentCallback): RecyclerV
     override fun getItemCount(): Int = listFavoriteGames.size
 
     inner class FavoriteViewHolder(private val binding: ItemGameFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
+        @ExperimentalStdlibApi
         fun bind(favoriteGame: DetailGame){
             with(binding){
-
+                cgPlatform.removeAllViews()
+                val listPlatform = favoriteGame.platforms.split(",").map { it.lowercase().trim() }
+                listPlatform.map {
+                    val itemPlatform = ViewHelper.generatePlatform(it,itemView.context, 16)
+                    if(itemPlatform != null){
+                        cgPlatform.addView(itemPlatform)
+                    }
+                }
+                tvItemDate.text = favoriteGame.released
+                tvItemOverview.text = favoriteGame.descriptionRaw.replace("\n", "").trim()
+                tvMetacritic.text = favoriteGame.metacritic.toString()
+                tvTitle.text = favoriteGame.name
+                ratingItem.rating = favoriteGame.rating.toFloat()
                 cvItemFavorite.setOnClickListener { callback.onFavoriteItemClick(favoriteGame) }
                 Glide.with(itemView.context).load(favoriteGame.backgroundImage)
                         .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)

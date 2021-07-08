@@ -62,6 +62,8 @@ data class GameDetailLocalEntity (
     @ColumnInfo(name = "publishers")
     val publishers: String,
 
+    @ColumnInfo(name = "screenshots")
+    var screenshots: String? = null,
 
 //    @ColumnInfo(name = "game_series_count")
 //    val gameSeriesCount: Int,

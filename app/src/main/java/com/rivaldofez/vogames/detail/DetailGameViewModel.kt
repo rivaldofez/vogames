@@ -14,4 +14,6 @@ class DetailGameViewModel(private val gameUseCase: GameUseCase): ViewModel() {
 
     fun setFavoriteGame(detailGame: DetailGame, state: Boolean) = gameUseCase.setFavoriteGame(detailGame, state)
 
+    fun setScreenshot(screenshot: String, id: String) = gameUseCase.setScreenshot(screenshot, id)
+
 }

@@ -11,4 +11,5 @@
     <string name="plc_show_metacritics">Show Metacritics</string>
     <string name="cd_icon">Icon Item</string>
     <string name="cd_image">Image Item</string>
+    <string name="platforms">Platforms</string>
 </resources>

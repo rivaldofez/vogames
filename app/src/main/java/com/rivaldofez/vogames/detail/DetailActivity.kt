@@ -1,16 +1,9 @@
 package com.rivaldofez.vogames.detail
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.navigation.navArgs
-import com.bumptech.glide.Glide
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.DetailGame
@@ -36,17 +29,16 @@ class DetailActivity : AppCompatActivity() {
         val screenshoots = DetailActivityArgs.fromBundle(intent.extras as Bundle).screenshots
 
         if(gameId!= null && screenshoots != null){
-            val sliderAdapter = SliderAdapter()
-            sliderAdapter.setImages(screenshoots.split(',').map { it.trim() })
-            binding.imgSlider.setSliderAdapter(sliderAdapter)
-            binding.imgSlider.setIndicatorAnimation(IndicatorAnimationType.WORM)
-            binding.imgSlider.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
-            binding.imgSlider.startAutoCycle()
+            attachImageSlider(screenshoots)
 
             detailGameViewModel.getDetailGame(gameId).observe(this, { detailGame ->
                 when (detailGame) {
                     is Resource.Success -> {
-                        detailGame.data?.let { setViewContent(it) }
+                        detailGame.data?.let {
+                            if(it.screenshots == null)
+                                detailGameViewModel.setScreenshot(screenshoots, gameId)
+                            setViewContent(it)
+                        }
                     }
                     is Resource.Error -> {
                         Log.d("Teston", "error")
@@ -78,6 +70,7 @@ class DetailActivity : AppCompatActivity() {
             }
             tvGameName.text = detailGame.name
             tvPublisher.text = detailGame.publishers
+            tvPlatform.text = detailGame.platforms
             tvMetacritic.text = detailGame.metacritic.toString()
             tvRelease.text = detailGame.released
             chartPopularity.setProgress((detailGame.rating.toFloat()/5F) * 100, true)
@@ -102,5 +95,14 @@ class DetailActivity : AppCompatActivity() {
             binding.btnFavorite.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.ic_favorite_unfilled)
             )
+    }
+
+    private fun attachImageSlider(screenshoot: String){
+        val sliderAdapter = SliderAdapter()
+        sliderAdapter.setImages(screenshoot.split(',').map { it.trim() })
+        binding.imgSlider.setSliderAdapter(sliderAdapter)
+        binding.imgSlider.setIndicatorAnimation(IndicatorAnimationType.WORM)
+        binding.imgSlider.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
+        binding.imgSlider.startAutoCycle()
     }
 }

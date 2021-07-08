@@ -23,6 +23,8 @@ interface GameDao {
     suspend fun insertDetailGame(detailGame: GameDetailLocalEntity)
 
     @Update
-    fun updateFavoriteGame(detailGame: GameDetailLocalEntity)
+    fun updateDetailGame(detailGame: GameDetailLocalEntity)
 
+    @Query("UPDATE detailgamelist set screenshots = :screenshots WHERE id = :id")
+    fun setScreenshot(screenshots: String, id: Int)
 }

@@ -107,7 +107,8 @@ object DataMapper {
             genres = input.genres,
             website = input.website,
             isFavorite = input.isFavorite,
-            publishers = input.publishers
+            publishers = input.publishers,
+            screenshots = input.screenshots
         )
 
     fun mapDomainToLocal(input : DetailGame): GameDetailLocalEntity =
@@ -128,6 +129,7 @@ object DataMapper {
             genres = input.genres,
             website = input.website,
             isFavorite = input.isFavorite,
-            publishers = input.publishers
+            publishers = input.publishers,
+            screenshots = input.screenshots
         )
 }

@@ -18,7 +18,9 @@ class LocalDataSource(private val gameDao: GameDao) {
 
     fun setFavoriteGame(detailGame: GameDetailLocalEntity, newState: Boolean) {
         detailGame.isFavorite = newState
-        gameDao.updateFavoriteGame(detailGame)
+        gameDao.updateDetailGame(detailGame)
     }
+    
+    fun setScreenshot(screenshots: String, id: String) = gameDao.setScreenshot(screenshots, id.toInt())
 
 }

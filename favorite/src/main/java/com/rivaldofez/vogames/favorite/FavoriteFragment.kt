@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.di.FavoriteModule
@@ -38,7 +38,6 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback {
                 layoutManager = LinearLayoutManager(context)
                 adapter = favoriteAdapter
             }
-
             favoriteViewModel.favoriteGames.observe(viewLifecycleOwner, { favoriteGames ->
                 favoriteAdapter.setFavoriteGames(favoriteGames)
             })
@@ -46,6 +45,9 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback {
     }
 
     override fun onFavoriteItemClick(favoriteItem: DetailGame) {
-        Toast.makeText(requireContext(), favoriteItem.name, Toast.LENGTH_SHORT).show()
+        val gotoDetailActivity = FavoriteFragmentDirections.actionFavoriteFragmentToDetailActivity(
+                favoriteItem.id.toString(), favoriteItem.screenshots
+        )
+        findNavController().navigate(gotoDetailActivity)
     }
 }

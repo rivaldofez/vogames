@@ -83,4 +83,8 @@ class GameRepository(
         val gameEntity = DataMapper.mapDomainToLocal(detailGame)
         appExecutors.diskIO().execute { localDataSource.setFavoriteGame(gameEntity, state) }
     }
+
+    override fun setScreenshot(screenshot: String, id: String) {
+        appExecutors.diskIO().execute { localDataSource.setScreenshot(screenshot, id) }
+    }
 }

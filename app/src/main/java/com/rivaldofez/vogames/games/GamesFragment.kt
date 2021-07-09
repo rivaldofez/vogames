@@ -1,17 +1,16 @@
 package com.rivaldofez.vogames.games
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
+import com.rivaldofez.vogames.core.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
-import com.rivaldofez.vogames.core.ui.GameAdapter
-import com.rivaldofez.vogames.core.ui.GameFragmentCallback
 import com.rivaldofez.vogames.databinding.FragmentGamesBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -51,53 +50,31 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
 
     private fun callObserveGames(){
         gamesViewModel.recentlyGames.observe(viewLifecycleOwner, { games ->
-            Log.d("Teston", "call games")
             if(games != null){
                 when(games){
                     is Resource.Loading -> showLoading(true)
                     is Resource.Success -> {
                         gameAdapter.setGames(games.data)
-                        binding.rvGame.scheduleLayoutAnimation()
                         showLoading(false)
+                        showMessage("success")
                     }
                     is Resource.Error -> {
                         showLoading(false)
+                        showMessage("error")
                     }
                 }
             }
         })
-
     }
 
     private fun callObserveSearch(){
         gamesViewModel.searchResult.observe(viewLifecycleOwner, { games ->
-            if(games != null){
+            if(games != null && games.isNotEmpty()){
                 gameAdapter.setGames(games)
-                binding.rvGame.scheduleLayoutAnimation()
+            }else{
+                showMessage("empty")
             }
         })
-    }
-
-    override fun onGameClick(game: Game) {
-        val gotoDetailActivity = GamesFragmentDirections.actionGamesFragmentToDetailActivity(
-                game.id.toString(), game.shortScreenshots
-        )
-        findNavController().navigate(gotoDetailActivity)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun showLoading(state: Boolean){
-        if(state){
-            binding.rvGame.visibility = View.GONE
-            binding.layoutLoading.loading.visibility = View.VISIBLE
-        }else{
-            binding.layoutLoading.loading.visibility = View.GONE
-            binding.rvGame.visibility = View.VISIBLE
-        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -117,9 +94,63 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
         return false
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        binding.layoutSearch.searchField.setOnQueryTextListener(this)
+    private fun showMessage(status: String){
+        when(status){
+            "success" -> {
+                with(binding){
+                    layoutMessage.imgMessage.visibility = View.GONE
+                    layoutMessage.tvMessage.visibility = View.GONE
+                    rvGame.visibility = View.VISIBLE
+                }
+            }
+            "error" -> {
+                with(binding){
+                    rvGame.visibility = View.GONE
+                    Glide.with(requireContext()).load(R.drawable.img_error).into(layoutMessage.imgMessage)
+                    layoutMessage.tvMessage.text = getString(R.string.error_message)
+                    layoutMessage.imgMessage.visibility = View.VISIBLE
+                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                }
+            }
+            "empty" -> {
+                with(binding){
+                    rvGame.visibility = View.GONE
+                    Glide.with(requireContext()).load(R.drawable.img_no_result).into(layoutMessage.imgMessage)
+                    layoutMessage.tvMessage.text = getString(R.string.empty_message)
+                    layoutMessage.imgMessage.visibility = View.VISIBLE
+                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                }
+            }
+            "loading" -> {
+                with(binding){
+                    rvGame.visibility = View.GONE
+                    layoutMessage.imgMessage.visibility = View.GONE
+                    layoutMessage.tvMessage.visibility = View.GONE
+                }
+            }
+        }
     }
 
+    private fun showLoading(state: Boolean){
+        if(state){
+            showMessage("loading")
+            binding.layoutLoading.loading.visibility = View.VISIBLE
+        }else{
+            binding.layoutLoading.loading.visibility = View.GONE
+        }
+    }
+
+    override fun onGameClick(game: Game) {
+        val gotoDetailActivity = GamesFragmentDirections.actionGamesFragmentToDetailActivity(
+                game.id.toString(), game.shortScreenshots
+        )
+        findNavController().navigate(gotoDetailActivity)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        gamesViewModel.searchResult.removeObservers(viewLifecycleOwner)
+        gamesViewModel.recentlyGames.removeObservers(viewLifecycleOwner)
+    }
 }

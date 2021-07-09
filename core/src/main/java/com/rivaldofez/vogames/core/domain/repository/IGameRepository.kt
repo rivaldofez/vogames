@@ -16,5 +16,7 @@ interface IGameRepository {
 
     fun setScreenshot(screenshot: String, id: String)
 
-    suspend fun getSearchNameResult(keyword: String): List<Game>
+    suspend fun getSearchNameResult(query: String): List<Game>
+
+    suspend fun getSearchNameFavoriteResult(query: String): List<DetailGame>
 }

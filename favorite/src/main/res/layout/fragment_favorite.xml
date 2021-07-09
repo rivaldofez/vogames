@@ -36,4 +36,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="invisible"/>
 
+    <include
+        android:id="@+id/layout_message"
+        layout="@layout/item_message"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

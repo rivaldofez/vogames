@@ -1,4 +1,4 @@
-package com.rivaldofez.vogames.core.ui
+package com.rivaldofez.vogames.games
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,7 +26,6 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
         return GameViewHolder(itemGamesBinding)
     }
 
-    @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = listGame[position]
         holder.bind(game)
@@ -35,11 +34,10 @@ class GameAdapter(private val callback: GameFragmentCallback): RecyclerView.Adap
     override fun getItemCount(): Int = listGame.size
 
     inner class GameViewHolder(private val binding: ItemGamesBinding): RecyclerView.ViewHolder(binding.root) {
-        @ExperimentalStdlibApi
         fun bind(game: Game){
             with(binding){
                 cgPlatform.removeAllViews()
-                val listPlatform = game.parentPlatforms.split(",").map { it.lowercase().trim() }
+                val listPlatform = game.parentPlatforms.split(",").map { it.trim() }
                 listPlatform.map {
                     val itemPlatform = ViewHelper.generatePlatform(it,itemView.context, 13)
                     if(itemPlatform != null){

@@ -2,8 +2,9 @@ package com.rivaldofez.vogames.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.DetailGame
@@ -38,13 +39,15 @@ class DetailActivity : AppCompatActivity() {
                                 detailGameViewModel.setScreenshot(screenshoots, gameId)
                             setViewContent(it)
                         }
+                        showLoading(false)
+                        showMessage("success")
                     }
                     is Resource.Error -> {
-                        Log.d("Teston", "error")
+                        showLoading(false)
+                        showMessage("error")
                     }
-
                     is Resource.Loading -> {
-                        Log.d("Teston", "loading")
+                        showLoading(true)
                     }
                 }
             })
@@ -102,5 +105,45 @@ class DetailActivity : AppCompatActivity() {
         binding.imgSlider.setIndicatorAnimation(IndicatorAnimationType.WORM)
         binding.imgSlider.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
         binding.imgSlider.startAutoCycle()
+    }
+
+    private fun showMessage(status: String){
+        when(status){
+            "success" -> {
+                with(binding){
+                    layoutMessage.imgMessage.visibility = View.GONE
+                    layoutMessage.tvMessage.visibility = View.GONE
+                    imgSlider.visibility = View.VISIBLE
+                    scItem.visibility = View.VISIBLE
+                    btnFavorite.visibility = View.VISIBLE
+                }
+            }
+            "error" -> {
+                with(binding){
+                    scItem.visibility = View.GONE
+                    btnFavorite.visibility = View.GONE
+                    Glide.with(this@DetailActivity).load(com.rivaldofez.vogames.core.R.drawable.img_error).into(layoutMessage.imgMessage)
+                    layoutMessage.tvMessage.text = getString(com.rivaldofez.vogames.core.R.string.error_message)
+                    layoutMessage.imgMessage.visibility = View.VISIBLE
+                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                }
+            }
+            "loading" -> {
+                with(binding){
+                    btnFavorite.visibility = View.GONE
+                    layoutMessage.imgMessage.visibility = View.GONE
+                    layoutMessage.tvMessage.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun showLoading(state: Boolean){
+        if(state){
+            showMessage("loading")
+            binding.layoutLoading.loading.visibility = View.VISIBLE
+        }else{
+            binding.layoutLoading.loading.visibility = View.GONE
+        }
     }
 }

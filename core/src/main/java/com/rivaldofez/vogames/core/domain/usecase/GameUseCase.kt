@@ -18,4 +18,6 @@ interface GameUseCase {
     fun setScreenshot(screenshot: String, id: String)
 
     suspend fun getSearchNameResult(query: String): List<Game>?
+
+    suspend fun getSearchNameFavoriteResult(query: String): List<DetailGame>
 }

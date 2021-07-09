@@ -1,4 +1,4 @@
-package com.rivaldofez.vogames.core.ui
+package com.rivaldofez.vogames.games
 
 import com.rivaldofez.vogames.core.domain.model.Game
 

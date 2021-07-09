@@ -25,7 +25,6 @@ class FavoriteAdapter(private val callback: FavoriteFragmentCallback): RecyclerV
         return FavoriteViewHolder(itemFavoriteBinding)
     }
 
-    @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val favoriteGame = listFavoriteGames[position]
         holder.bind(favoriteGame)
@@ -34,11 +33,10 @@ class FavoriteAdapter(private val callback: FavoriteFragmentCallback): RecyclerV
     override fun getItemCount(): Int = listFavoriteGames.size
 
     inner class FavoriteViewHolder(private val binding: ItemGameFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
-        @ExperimentalStdlibApi
         fun bind(favoriteGame: DetailGame){
             with(binding){
                 cgPlatform.removeAllViews()
-                val listPlatform = favoriteGame.platforms.split(",").map { it.lowercase().trim() }
+                val listPlatform = favoriteGame.platforms.split(",").map { it.trim() }
                 listPlatform.map {
                     val itemPlatform = ViewHelper.generatePlatform(it,itemView.context, 16)
                     if(itemPlatform != null){

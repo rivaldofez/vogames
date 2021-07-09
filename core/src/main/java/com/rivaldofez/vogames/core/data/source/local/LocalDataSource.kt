@@ -25,4 +25,6 @@ class LocalDataSource(private val gameDao: GameDao) {
 
     suspend fun getSearchNameResult(query: String) = gameDao.getSearchNameResult("%$query%")
 
+    suspend fun getSearchNameFavoriteResult(query: String) = gameDao.getSearchNameFavoriteResult("%$query%")
+
 }

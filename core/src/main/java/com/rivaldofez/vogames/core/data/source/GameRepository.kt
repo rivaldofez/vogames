@@ -45,8 +45,12 @@ class GameRepository(
         }
     }
 
-    override suspend fun getSearchNameResult(keyword: String): List<Game> {
-        return DataMapper.mapListLocalToDomain(localDataSource.getSearchNameResult(keyword))
+    override suspend fun getSearchNameResult(query: String): List<Game> {
+        return DataMapper.mapListLocalToDomain(localDataSource.getSearchNameResult(query))
+    }
+
+    override suspend fun getSearchNameFavoriteResult(query: String): List<DetailGame> {
+        return DataMapper.mapListDetailLocalToDomain(localDataSource.getSearchNameFavoriteResult(query))
     }
 
     override fun getDetailGame(id: String): Flow<Resource<DetailGame?>> =
@@ -83,4 +87,5 @@ class GameRepository(
     override fun setScreenshot(screenshot: String, id: String) {
         appExecutors.diskIO().execute { localDataSource.setScreenshot(screenshot, id) }
     }
+
 }

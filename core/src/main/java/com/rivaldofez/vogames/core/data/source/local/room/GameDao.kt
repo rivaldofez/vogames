@@ -30,4 +30,7 @@ interface GameDao {
 
     @Query("SELECT * FROM gamelist WHERE name like :query")
     suspend fun getSearchNameResult(query: String): List<GameItemLocalEntity>
+
+    @Query("SELECT * FROm detailgamelist WHERE isFavorite = 1 and name like :query")
+    suspend fun getSearchNameFavoriteResult(query: String): List<GameDetailLocalEntity>
 }

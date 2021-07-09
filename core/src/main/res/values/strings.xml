@@ -12,4 +12,7 @@
     <string name="plc_show_metacritics">Show Metacritics</string>
     <string name="cd_icon">Icon Item</string>
     <string name="cd_image">Image Item</string>
+    <string name="error_message">There is an error while fetch data, try again later.</string>
+    <string name="empty_message">No result with that keyword, try with another keyword.</string>
+    <string name="nofavorite_message">No data in favorite list, add first data.</string>
 </resources>

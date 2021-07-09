@@ -19,13 +19,17 @@ class HomeActivity : AppCompatActivity() {
         binding.bnavMain.setNavigationChangeListener{_, position ->
             when(position){
                 0 -> {
+                    navController.popBackStack()
                     navController.navigate(R.id.gamesFragment)
                 }
                 1 -> {
+                    navController.popBackStack()
                     navController.navigate(R.id.favoriteFragment)
                 }
                 2 -> {
+                    navController.popBackStack()
                     navController.navigate(R.id.aboutFragment)
+
                 }
             }
         }

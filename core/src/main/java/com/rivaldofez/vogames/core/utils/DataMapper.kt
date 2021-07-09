@@ -7,6 +7,10 @@ import com.rivaldofez.vogames.core.data.source.remote.response.GameListItem
 import com.rivaldofez.vogames.core.data.source.remote.response.subtype.*
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.core.domain.model.Game
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 object DataMapper {
 
@@ -132,4 +136,16 @@ object DataMapper {
             publishers = input.publishers,
             screenshots = input.screenshots
         )
+
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun formatDate(value: String): String{
+        return try {
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(value)
+            SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(date)
+
+        } catch (e: ParseException) {
+            print("Error while parse date" + e.message.toString())
+            "-"
+        }
+    }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.di.FavoriteModule
@@ -42,6 +43,7 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         loadKoinModules(FavoriteModule)
         callObserveGames()
         binding.layoutSearch.searchField.setOnQueryTextListener(this)
@@ -160,7 +162,5 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        favoriteViewModel.searchResult.removeObservers(viewLifecycleOwner)
-        favoriteViewModel.favoriteGames.removeObservers(viewLifecycleOwner)
     }
 }

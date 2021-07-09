@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.rivaldofez.vogames.core.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
@@ -39,6 +40,7 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
 
         if(activity != null){
             callObserveGames()
+            binding.layoutLoading.loading.setIndeterminateDrawable(DoubleBounce())
             binding.layoutSearch.searchField.setOnQueryTextListener(this)
 
             with(binding.rvGame){
@@ -150,7 +152,5 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        gamesViewModel.searchResult.removeObservers(viewLifecycleOwner)
-        gamesViewModel.recentlyGames.removeObservers(viewLifecycleOwner)
     }
 }

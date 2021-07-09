@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.DetailGame
+import com.rivaldofez.vogames.core.utils.DataMapper
 import com.rivaldofez.vogames.core.utils.ViewHelper
 import com.rivaldofez.vogames.databinding.ActivityDetailBinding
 import com.rivaldofez.vogames.games.SliderAdapter
@@ -25,6 +27,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.layoutLoading.loading.setIndeterminateDrawable(DoubleBounce())
 
         val gameId = DetailActivityArgs.fromBundle(intent.extras as Bundle).gameId
         val screenshoots = DetailActivityArgs.fromBundle(intent.extras as Bundle).screenshots
@@ -74,7 +77,7 @@ class DetailActivity : AppCompatActivity() {
             tvPublisher.text = detailGame.publishers
             tvPlatform.text = detailGame.platforms
             tvMetacritic.text = detailGame.metacritic.toString()
-            tvRelease.text = detailGame.released
+            tvRelease.text = DataMapper.formatDate(detailGame.released)
             chartPopularity.setProgress((detailGame.rating.toFloat()/5F) * 100, true)
             tvAbout.text = detailGame.descriptionRaw.replace("\n", "").trim()
 

@@ -23,9 +23,8 @@ class SplashActivity : AppCompatActivity() {
 
         Glide.with(this).load(R.drawable.logo_full).into(binding.imgLogoSplash)
 
-        val sprite = DoubleBounce()
         binding.loadingSplash.visibility = View.VISIBLE
-        binding.loadingSplash.setIndeterminateDrawable(sprite)
+        binding.loadingSplash.setIndeterminateDrawable(DoubleBounce())
 
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, HomeActivity::class.java))

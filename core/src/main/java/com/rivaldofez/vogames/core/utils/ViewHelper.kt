@@ -9,6 +9,9 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.rivaldofez.vogames.core.R
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 object ViewHelper {
     fun generatePlatform(platform: String, context: Context, size: Int ): ImageView?{

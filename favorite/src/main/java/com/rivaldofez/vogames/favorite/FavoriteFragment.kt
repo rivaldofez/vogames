@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.di.FavoriteModule
@@ -147,12 +146,12 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
             if(view != null){
                 val swipedPosition = viewHolder.layoutPosition
                 val swipedItem = favoriteAdapter.getSwipedItem(swipedPosition)
-                swipedItem?.let { favoriteViewModel.setFavoriteGame(swipedItem, !swipedItem.isFavorite) }
+                swipedItem.let { favoriteViewModel.setFavoriteGame(swipedItem, !swipedItem.isFavorite) }
 
                 val snackbar = Snackbar.make(view as View, "Batalkan menghapus item sebelumnya?", Snackbar.LENGTH_LONG)
 
                 snackbar.setAction("OK"){
-                    swipedItem?.let { favoriteViewModel.setFavoriteGame(swipedItem, swipedItem.isFavorite) }
+                    swipedItem.let { favoriteViewModel.setFavoriteGame(swipedItem, swipedItem.isFavorite) }
                 }
                 snackbar.show()
             }

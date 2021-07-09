@@ -14,19 +14,19 @@ import kotlin.collections.ArrayList
 
 object DataMapper {
 
-    fun mapListScreenshotToString(input: List<ShortScreenshotsItem>): String =
+    private fun mapListScreenshotToString(input: List<ShortScreenshotsItem>): String =
         input.joinToString { it.image }
 
-    fun mapListParentPlatformToString(input: List<ParentPlatformsItem>): String =
+    private fun mapListParentPlatformToString(input: List<ParentPlatformsItem>): String =
         input.joinToString { it.platform.name }
 
-    fun mapGenresToString(input: List<GenresItem>): String =
+    private fun mapGenresToString(input: List<GenresItem>): String =
         input.joinToString { it.name }
 
-    fun mapListPlatformDetailToString(input: List<ParentPlatformsItemDetail>): String =
+    private fun mapListPlatformDetailToString(input: List<ParentPlatformsItemDetail>): String =
         input.joinToString { it.platform.name }
 
-    fun mapListPublisherToString(input: List<PublishersItem>): String =
+    private fun mapListPublisherToString(input: List<PublishersItem>): String =
         input.joinToString { it.name }
 
     fun mapListResponseToLocal(input: List<GameListItem>): List<GameItemLocalEntity> {

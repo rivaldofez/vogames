@@ -2,6 +2,7 @@ package com.rivaldofez.vogames.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.core.domain.usecase.GameUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class FavoriteViewModel(gameUseCase: GameUseCase): ViewModel() {
+class FavoriteViewModel(private val gameUseCase: GameUseCase): ViewModel() {
     val favoriteGames = gameUseCase.getFavoriteGames().asLiveData()
 
     val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
@@ -25,4 +26,6 @@ class FavoriteViewModel(gameUseCase: GameUseCase): ViewModel() {
             .mapLatest {
                 gameUseCase.getSearchNameFavoriteResult(it)
             }.asLiveData()
+
+    fun setFavoriteGame(detailGame: DetailGame, state: Boolean) = gameUseCase.setFavoriteGame(detailGame, state)
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.vogames.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.DetailGame
@@ -82,6 +83,7 @@ class DetailActivity : AppCompatActivity() {
                 setOnClickListener {
                     detailGameViewModel.setFavoriteGame(detailGame, !detailGame.isFavorite)
                     setStateFavoriteIcon(detailGame.isFavorite)
+                    showSnackBarFavorite(!detailGame.isFavorite)
                 }
             }
         }
@@ -96,6 +98,16 @@ class DetailActivity : AppCompatActivity() {
             binding.btnFavorite.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.ic_favorite_unfilled)
             )
+    }
+
+    private fun showSnackBarFavorite(isFavorite: Boolean){
+        if(isFavorite){
+            val snackbar = Snackbar.make(binding.root, "Added to Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }else{
+            val snackbar = Snackbar.make(binding.root, "Removed from Favorite List", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }
     }
 
     private fun attachImageSlider(screenshoot: String){

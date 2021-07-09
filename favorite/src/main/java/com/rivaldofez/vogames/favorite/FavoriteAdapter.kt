@@ -32,6 +32,8 @@ class FavoriteAdapter(private val callback: FavoriteFragmentCallback): RecyclerV
 
     override fun getItemCount(): Int = listFavoriteGames.size
 
+    fun getSwipedItem(swipedPosition: Int): DetailGame? = listFavoriteGames[swipedPosition]
+
     inner class FavoriteViewHolder(private val binding: ItemGameFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(favoriteGame: DetailGame){
             with(binding){

@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.di.FavoriteModule
 import com.rivaldofez.vogames.core.R
@@ -47,6 +50,7 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
             with(binding.rvFavoriteGame){
                 layoutManager = LinearLayoutManager(context)
                 adapter = favoriteAdapter
+                itemTouchHelper.attachToRecyclerView(this)
             }
 
         }
@@ -129,6 +133,29 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
             }
         }
     }
+
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback(){
+        override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int =
+                makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean =
+                true
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            if(view != null){
+                val swipedPosition = viewHolder.layoutPosition
+                val swipedItem = favoriteAdapter.getSwipedItem(swipedPosition)
+                swipedItem?.let { favoriteViewModel.setFavoriteGame(swipedItem, !swipedItem.isFavorite) }
+
+                val snackbar = Snackbar.make(view as View, "Batalkan menghapus item sebelumnya?", Snackbar.LENGTH_LONG)
+
+                snackbar.setAction("OK"){
+                    swipedItem?.let { favoriteViewModel.setFavoriteGame(swipedItem, swipedItem.isFavorite) }
+                }
+                snackbar.show()
+            }
+        }
+    })
 
     override fun onDestroy() {
         super.onDestroy()

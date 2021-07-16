@@ -23,6 +23,8 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailGameViewModel: DetailGameViewModel by viewModel()
+    private val sliderAdapter = SliderAdapter()
+    private lateinit var gameId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,7 @@ class DetailActivity : AppCompatActivity() {
         binding.layoutLoading.loading.setIndeterminateDrawable(DoubleBounce())
         setActionBar()
 
-        val gameId = DetailActivityArgs.fromBundle(intent.extras as Bundle).gameId
+        gameId = DetailActivityArgs.fromBundle(intent.extras as Bundle).gameId.toString()
         val screenshoots = DetailActivityArgs.fromBundle(intent.extras as Bundle).screenshots
 
         if(gameId!= null && screenshoots != null){
@@ -116,12 +118,18 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun attachImageSlider(screenshoot: String){
-        val sliderAdapter = SliderAdapter()
         sliderAdapter.setImages(screenshoot.split(',').map { it.trim() })
         binding.imgSlider.setSliderAdapter(sliderAdapter)
         binding.imgSlider.setIndicatorAnimation(IndicatorAnimationType.WORM)
         binding.imgSlider.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION)
         binding.imgSlider.startAutoCycle()
+    }
+
+    private fun detachedImageSlider(){
+        sliderAdapter.removeImages()
+        binding.imgSlider.stopAutoCycle()
+        binding.imgSlider.removeAllViewsInLayout()
+        binding.imgSlider.removeAllViews()
     }
 
     private fun showMessage(status: String){
@@ -173,5 +181,12 @@ class DetailActivity : AppCompatActivity() {
         if(item.itemId == android.R.id.home)
             finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        detailGameViewModel.getDetailGame(gameId).removeObservers(this)
+        unregisterComponentCallbacks(this)
+        detachedImageSlider()
     }
 }

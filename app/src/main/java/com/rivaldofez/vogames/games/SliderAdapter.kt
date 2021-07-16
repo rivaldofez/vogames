@@ -1,5 +1,6 @@
 package com.rivaldofez.vogames.games
 
+import android.database.DataSetObserver
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -14,6 +15,11 @@ class SliderAdapter: SliderViewAdapter<SliderAdapter.Holder>() {
     fun setImages(images: List<String>){
         this.listImages.clear()
         this.listImages.addAll(images)
+        notifyDataSetChanged()
+    }
+
+    fun removeImages(){
+        this.listImages.clear()
         notifyDataSetChanged()
     }
 
@@ -37,6 +43,9 @@ class SliderAdapter: SliderViewAdapter<SliderAdapter.Holder>() {
                         .error(R.drawable.ic_error)).into(imgSliderItem)
             }
         }
-
     }
+
+
+
+
 }

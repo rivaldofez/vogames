@@ -47,4 +47,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.gauravk.bubblenavigation:bubblenavigation:$bubbleNavigationVersion"
     implementation "com.ramijemli.percentagechartview:percentagechartview:$percentageChartVersion"
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }

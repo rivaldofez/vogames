@@ -8,6 +8,8 @@ import com.rivaldofez.vogames.core.data.source.local.LocalDataSource
 import com.rivaldofez.vogames.core.data.source.local.room.GameDatabase
 import com.rivaldofez.vogames.core.domain.repository.IGameRepository
 import com.rivaldofez.vogames.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -38,10 +40,14 @@ val networkModule = module {
 val databaseModule = module {
     factory { get<GameDatabase>().gameDao()}
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("rivaldofez".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             GameDatabase::class.java, "Game.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 

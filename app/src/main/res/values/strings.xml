@@ -8,4 +8,16 @@
     <string name="plc_publisher">Publisher</string>
     <string name="plc_show_metacritics">Show Metacritics</string>
     <string name="platforms">Platforms</string>
+    <string name="dependencies"> ~ Clean Architecture\n~ Jetpack Navigation\n~ Bubble Navigation Bar\n~ Glide\n~ RecyclerView\n~ Retrofit\n~ Room\n~ Coroutine Flow\n~ Koin Dependency Injection</string>
+    <string name="made_by">Made By</string>
+    <string name="about">About</string>
+    <string name="features">~ Get Recently Video Games\n~ Save Favorite Games\n~ Search Feature</string>
+    <string name="name">Rivaldo Fernandes</string>
+    <string name="feature_title">Features:</string>
+    <string name="dependencies_title">Dependencies:</string>
+    <string name="social_media_title">Social Media:</string>
+    <string name="instagram">rivaldofez</string>
+    <string name="github">github.com/rivaldofez</string>
+    <string name="linkedIn">linkedin.com/in/rivaldofez</string>
+    <string name="detail_game">Detail Game</string>
 </resources>

@@ -248,19 +248,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_platform_title"
                 tools:text="Sony Interactive Entertainment"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/black_500"
-                android:text="@string/plc_show_metacritics"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_platform" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

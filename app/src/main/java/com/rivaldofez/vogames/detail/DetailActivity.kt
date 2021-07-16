@@ -2,6 +2,7 @@ package com.rivaldofez.vogames.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -28,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.layoutLoading.loading.setIndeterminateDrawable(DoubleBounce())
+        setActionBar()
 
         val gameId = DetailActivityArgs.fromBundle(intent.extras as Bundle).gameId
         val screenshoots = DetailActivityArgs.fromBundle(intent.extras as Bundle).screenshots
@@ -160,5 +162,16 @@ class DetailActivity : AppCompatActivity() {
         }else{
             binding.layoutLoading.loading.visibility = View.GONE
         }
+    }
+
+    private fun setActionBar(){
+        supportActionBar?.title = getString(R.string.detail_game)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home)
+            finish()
+        return super.onOptionsItemSelected(item)
     }
 }

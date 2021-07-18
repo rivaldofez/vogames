@@ -20,4 +20,7 @@
     <string name="github">github.com/rivaldofez</string>
     <string name="linkedIn">linkedin.com/in/rivaldofez</string>
     <string name="detail_game">Detail Game</string>
+    <string name="website">Website</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

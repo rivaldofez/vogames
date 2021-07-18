@@ -63,5 +63,5 @@ data class GameDetailLocalEntity (
     val publishers: String,
 
     @ColumnInfo(name = "screenshots")
-    var screenshots: String? = null,
+    var screenshots: String = "",
 )

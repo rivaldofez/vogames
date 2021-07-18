@@ -2,6 +2,8 @@ package com.rivaldofez.vogames
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.rivaldofez.vogames.databinding.ActivityHomeBinding
 
@@ -29,8 +31,17 @@ class HomeActivity : AppCompatActivity() {
                 2 -> {
                     navController.popBackStack()
                     navController.navigate(R.id.aboutFragment)
-
                 }
+            }
+        }
+
+        navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+            if (destination.id == R.id.gamesFragment || destination.id == R.id.favoriteFragment || destination.id == R.id.aboutFragment) {
+                binding.bnavMain.visibility = View.VISIBLE
+                binding.toolbarMain.visibility = View.VISIBLE
+            } else {
+                binding.bnavMain.visibility = View.GONE
+                binding.toolbarMain.visibility = View.GONE
             }
         }
     }

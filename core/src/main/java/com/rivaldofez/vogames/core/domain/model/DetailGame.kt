@@ -18,5 +18,5 @@ data class DetailGame (
     val website: String,
     var isFavorite: Boolean = false,
     val publishers: String,
-    var screenshots: String?,
+    var screenshots: String,
 )

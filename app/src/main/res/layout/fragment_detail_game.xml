@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_700"
-    tools:context=".detail.DetailActivity">
+    tools:context=".detailgame.DetailGameFragment">
 
     <ScrollView
         android:id="@+id/sc_item"
@@ -248,6 +248,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_platform_title"
                 tools:text="Sony Interactive Entertainment"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_webview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/black_500"
+                android:text="@string/website"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_platform" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -272,4 +285,5 @@
     <include
         android:id="@+id/layout_message"
         layout="@layout/item_message"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

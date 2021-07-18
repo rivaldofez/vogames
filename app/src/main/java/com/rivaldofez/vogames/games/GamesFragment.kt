@@ -143,10 +143,10 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
     }
 
     override fun onGameClick(game: Game) {
-        val gotoDetailActivity = GamesFragmentDirections.actionGamesFragmentToDetailActivity(
+        val gotoDetailFragment = GamesFragmentDirections.actionGamesFragmentToDetailGameFragment(
                 game.id.toString(), game.shortScreenshots
         )
-        findNavController().navigate(gotoDetailActivity)
+        findNavController().navigate(gotoDetailFragment)
     }
 
     override fun onDestroyView() {

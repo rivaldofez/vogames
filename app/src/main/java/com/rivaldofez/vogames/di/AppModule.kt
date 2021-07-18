@@ -2,7 +2,7 @@ package com.rivaldofez.vogames.di
 
 import com.rivaldofez.vogames.core.domain.usecase.GameInteractor
 import com.rivaldofez.vogames.core.domain.usecase.GameUseCase
-import com.rivaldofez.vogames.detail.DetailGameViewModel
+import com.rivaldofez.vogames.detailgame.DetailGameViewModel
 import com.rivaldofez.vogames.games.GamesViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -18,5 +18,5 @@ val useCaseModule = module {
 @FlowPreview
 val viewModelModule = module {
     viewModel{ GamesViewModel(get()) }
-    viewModel{DetailGameViewModel(get())}
+    viewModel{ DetailGameViewModel(get()) }
 }

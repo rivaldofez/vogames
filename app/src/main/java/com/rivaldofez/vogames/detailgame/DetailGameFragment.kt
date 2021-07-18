@@ -1,10 +1,12 @@
-package com.rivaldofez.vogames.detail
+package com.rivaldofez.vogames.detailgame
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.android.material.snackbar.Snackbar
@@ -13,37 +15,42 @@ import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.DetailGame
 import com.rivaldofez.vogames.core.utils.DataMapper
 import com.rivaldofez.vogames.core.utils.ViewHelper
-import com.rivaldofez.vogames.databinding.ActivityDetailBinding
+import com.rivaldofez.vogames.databinding.FragmentDetailGameBinding
 import com.rivaldofez.vogames.games.SliderAdapter
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityDetailBinding
+class DetailGameFragment : Fragment() {
+    private var _binding: FragmentDetailGameBinding? = null
+    private val binding get() = _binding!!
     private val detailGameViewModel: DetailGameViewModel by viewModel()
     private val sliderAdapter = SliderAdapter()
-    private lateinit var gameId: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDetailGameBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.layoutLoading.loading.setIndeterminateDrawable(DoubleBounce())
-        setActionBar()
 
-        gameId = DetailActivityArgs.fromBundle(intent.extras as Bundle).gameId.toString()
-        val screenshoots = DetailActivityArgs.fromBundle(intent.extras as Bundle).screenshots
+        val gameId = DetailGameFragmentArgs.fromBundle(arguments as Bundle).gameId
+        val screenshoots = DetailGameFragmentArgs.fromBundle(arguments as Bundle).screenshots
 
-        if(gameId!= null && screenshoots != null){
+        if(screenshoots != null && gameId != null){
             attachImageSlider(screenshoots)
 
-            detailGameViewModel.getDetailGame(gameId).observe(this, { detailGame ->
+            detailGameViewModel.getDetailGame(gameId).observe(viewLifecycleOwner, { detailGame ->
                 when (detailGame) {
                     is Resource.Success -> {
                         detailGame.data?.let {
-                            if(it.screenshots == null)
+                            if(it.screenshots.isEmpty())
                                 detailGameViewModel.setScreenshot(screenshoots, gameId)
                             setViewContent(it)
                         }
@@ -66,7 +73,7 @@ class DetailActivity : AppCompatActivity() {
         with(binding){
             cgPlatform.removeAllViews()
             detailGame.platforms.split(",").map{
-                val itemPlatform = ViewHelper.generatePlatform(it.trim(), this@DetailActivity,20)
+                val itemPlatform = ViewHelper.generatePlatform(it.trim(), requireContext(),20)
                 if(itemPlatform != null){
                     cgPlatform.addView(itemPlatform)
                 }
@@ -74,7 +81,7 @@ class DetailActivity : AppCompatActivity() {
             cgGenres.removeAllViews()
             detailGame.genres.split(",").map {
                 cgGenres.addView(
-                        ViewHelper.generateChipItem(it, this@DetailActivity)
+                    ViewHelper.generateChipItem(it, requireContext())
                 )
             }
             tvGameName.text = detailGame.name
@@ -93,17 +100,24 @@ class DetailActivity : AppCompatActivity() {
                     showSnackBarFavorite(!detailGame.isFavorite)
                 }
             }
+
+            btnWebview.setOnClickListener {
+                val gotoWebView = DetailGameFragmentDirections.actionDetailGameFragmentToWebviewFragment(
+                    detailGame.website
+                )
+                findNavController().navigate(gotoWebView)
+            }
         }
     }
 
     private fun setStateFavoriteIcon(isFavorite: Boolean){
         if(isFavorite)
             binding.btnFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(this, R.drawable.ic_favorite)
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
             )
         else
             binding.btnFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(this, R.drawable.ic_favorite_unfilled)
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_unfilled)
             )
     }
 
@@ -147,7 +161,7 @@ class DetailActivity : AppCompatActivity() {
                 with(binding){
                     scItem.visibility = View.GONE
                     btnFavorite.visibility = View.GONE
-                    Glide.with(this@DetailActivity).load(com.rivaldofez.vogames.core.R.drawable.img_error).into(layoutMessage.imgMessage)
+                    Glide.with(requireContext()).load(com.rivaldofez.vogames.core.R.drawable.img_error).into(layoutMessage.imgMessage)
                     layoutMessage.tvMessage.text = getString(com.rivaldofez.vogames.core.R.string.error_message)
                     layoutMessage.imgMessage.visibility = View.VISIBLE
                     layoutMessage.tvMessage.visibility = View.VISIBLE
@@ -172,21 +186,13 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setActionBar(){
-        supportActionBar?.title = getString(R.string.detail_game)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home)
-            finish()
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onStop() {
         super.onStop()
-        detailGameViewModel.getDetailGame(gameId).removeObservers(this)
-        unregisterComponentCallbacks(this)
         detachedImageSlider()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

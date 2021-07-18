@@ -1,4 +1,4 @@
-package com.rivaldofez.vogames.detail
+package com.rivaldofez.vogames.detailgame
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

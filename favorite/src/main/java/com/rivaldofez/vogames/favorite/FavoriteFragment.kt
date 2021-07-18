@@ -79,10 +79,10 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
     }
 
     override fun onFavoriteItemClick(favoriteItem: DetailGame) {
-        val gotoDetailActivity = FavoriteFragmentDirections.actionFavoriteFragmentToDetailActivity(
+        val gotoDetailFragment = FavoriteFragmentDirections.actionFavoriteFragmentToDetailGameFragment(
                 favoriteItem.id.toString(), favoriteItem.screenshots
         )
-        findNavController().navigate(gotoDetailActivity)
+        findNavController().navigate(gotoDetailFragment)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

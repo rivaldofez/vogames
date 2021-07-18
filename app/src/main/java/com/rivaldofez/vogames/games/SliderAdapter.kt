@@ -1,6 +1,5 @@
 package com.rivaldofez.vogames.games
 
-import android.database.DataSetObserver
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide

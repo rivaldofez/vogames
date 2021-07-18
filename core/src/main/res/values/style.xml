@@ -22,4 +22,8 @@
         <item name="android:queryBackground">@android:color/transparent</item>
         <item name="iconTint">@color/white</item>
     </style>
+
+    <style name="WindowBackground">
+        <item name="backgroundColor">@color/black_700</item>
+    </style>
 </resources>

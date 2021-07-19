@@ -32,7 +32,13 @@
         layout="@layout/item_loading"/>
 
     <include
-        android:id="@+id/layout_message"
-        layout="@layout/item_message"/>
+        android:id="@+id/layout_error"
+        layout="@layout/item_error"
+        tools:visibility="gone"/>
+
+    <include
+        android:id="@+id/layout_empty"
+        layout="@layout/item_empty"
+        tools:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

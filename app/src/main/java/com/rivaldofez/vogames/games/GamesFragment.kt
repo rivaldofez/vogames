@@ -100,34 +100,38 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
         when(status){
             "success" -> {
                 with(binding){
-                    layoutMessage.imgMessage.visibility = View.GONE
-                    layoutMessage.tvMessage.visibility = View.GONE
+                    layoutEmpty.lottieEmpty.visibility = View.GONE
+                    layoutEmpty.tvMessage.visibility = View.GONE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
                     rvGame.visibility = View.VISIBLE
                 }
             }
             "error" -> {
                 with(binding){
                     rvGame.visibility = View.GONE
-                    Glide.with(requireContext()).load(R.drawable.img_error).into(layoutMessage.imgMessage)
-                    layoutMessage.tvMessage.text = getString(R.string.error_message)
-                    layoutMessage.imgMessage.visibility = View.VISIBLE
-                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                    layoutError.lottieError.visibility = View.VISIBLE
+                    layoutError.tvMessage.visibility = View.VISIBLE
+                    layoutEmpty.lottieEmpty.visibility = View.GONE
+                    layoutEmpty.tvMessage.visibility = View.GONE
                 }
             }
             "empty" -> {
                 with(binding){
                     rvGame.visibility = View.GONE
-                    Glide.with(requireContext()).load(R.drawable.img_no_result).into(layoutMessage.imgMessage)
-                    layoutMessage.tvMessage.text = getString(R.string.empty_message)
-                    layoutMessage.imgMessage.visibility = View.VISIBLE
-                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
+                    layoutEmpty.lottieEmpty.visibility = View.VISIBLE
+                    layoutEmpty.tvMessage.visibility = View.VISIBLE
                 }
             }
             "loading" -> {
                 with(binding){
                     rvGame.visibility = View.GONE
-                    layoutMessage.imgMessage.visibility = View.GONE
-                    layoutMessage.tvMessage.visibility = View.GONE
+                    layoutEmpty.lottieEmpty.visibility = View.GONE
+                    layoutEmpty.tvMessage.visibility = View.GONE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
                 }
             }
         }
@@ -147,6 +151,11 @@ class GamesFragment : Fragment(), GameFragmentCallback, SearchView.OnQueryTextLi
                 game.id.toString(), game.shortScreenshots
         )
         findNavController().navigate(gotoDetailFragment)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.rvGame.adapter = null
     }
 
     override fun onDestroyView() {

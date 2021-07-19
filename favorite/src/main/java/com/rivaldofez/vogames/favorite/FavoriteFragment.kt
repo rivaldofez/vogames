@@ -106,30 +106,33 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
         when(status){
             "success" -> {
                 with(binding){
-                    layoutMessage.imgMessage.visibility = View.GONE
-                    layoutMessage.tvMessage.visibility = View.GONE
+                    layoutEmpty.lottieEmpty.visibility = View.GONE
+                    layoutEmpty.tvMessage.visibility = View.GONE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
                     rvFavoriteGame.visibility = View.VISIBLE
                     layoutSearch.searchField.visibility = View.VISIBLE
                 }
             }
             "empty" -> {
                 with(binding){
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
+                    layoutEmpty.lottieEmpty.visibility = View.VISIBLE
+                    layoutEmpty.tvMessage.visibility = View.VISIBLE
                     rvFavoriteGame.visibility = View.GONE
                     layoutSearch.searchField.visibility = View.VISIBLE
-                    Glide.with(requireContext()).load(R.drawable.img_no_result).into(layoutMessage.imgMessage)
-                    layoutMessage.tvMessage.text = getString(R.string.empty_message)
-                    layoutMessage.imgMessage.visibility = View.VISIBLE
-                    layoutMessage.tvMessage.visibility = View.VISIBLE
                 }
             }
             "nofavorite" -> {
                 with(binding){
                     rvFavoriteGame.visibility = View.GONE
                     layoutSearch.searchField.visibility = View.GONE
-                    Glide.with(requireContext()).load(R.drawable.img_no_result).into(layoutMessage.imgMessage)
-                    layoutMessage.tvMessage.text = getString(R.string.nofavorite_message)
-                    layoutMessage.imgMessage.visibility = View.VISIBLE
-                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
+                    layoutEmpty.lottieEmpty.visibility = View.VISIBLE
+                    layoutEmpty.tvMessage.text = getString(R.string.nofavorite_message)
+                    layoutEmpty.tvMessage.visibility = View.VISIBLE
                 }
             }
         }
@@ -157,6 +160,11 @@ class FavoriteFragment : Fragment(), FavoriteFragmentCallback, SearchView.OnQuer
             }
         }
     })
+
+    override fun onStop() {
+        super.onStop()
+        binding.rvFavoriteGame.adapter = null
+    }
 
     override fun onDestroy() {
         super.onDestroy()

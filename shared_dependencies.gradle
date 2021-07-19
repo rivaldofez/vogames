@@ -25,4 +25,7 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidx_espresso_version"
+
+    implementation "com.airbnb.android:lottie:$lottie_version"
 }

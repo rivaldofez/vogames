@@ -150,8 +150,8 @@ class DetailGameFragment : Fragment() {
         when(status){
             "success" -> {
                 with(binding){
-                    layoutMessage.imgMessage.visibility = View.GONE
-                    layoutMessage.tvMessage.visibility = View.GONE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
                     imgSlider.visibility = View.VISIBLE
                     scItem.visibility = View.VISIBLE
                     btnFavorite.visibility = View.VISIBLE
@@ -161,17 +161,15 @@ class DetailGameFragment : Fragment() {
                 with(binding){
                     scItem.visibility = View.GONE
                     btnFavorite.visibility = View.GONE
-                    Glide.with(requireContext()).load(com.rivaldofez.vogames.core.R.drawable.img_error).into(layoutMessage.imgMessage)
-                    layoutMessage.tvMessage.text = getString(com.rivaldofez.vogames.core.R.string.error_message)
-                    layoutMessage.imgMessage.visibility = View.VISIBLE
-                    layoutMessage.tvMessage.visibility = View.VISIBLE
+                    layoutError.lottieError.visibility = View.VISIBLE
+                    layoutError.tvMessage.visibility = View.VISIBLE
                 }
             }
             "loading" -> {
                 with(binding){
                     btnFavorite.visibility = View.GONE
-                    layoutMessage.imgMessage.visibility = View.GONE
-                    layoutMessage.tvMessage.visibility = View.GONE
+                    layoutError.lottieError.visibility = View.GONE
+                    layoutError.tvMessage.visibility = View.GONE
                 }
             }
         }

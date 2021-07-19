@@ -2,14 +2,12 @@ package com.rivaldofez.vogames.games
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.github.ybq.android.spinkit.style.DoubleBounce
-import com.rivaldofez.vogames.core.R
 import com.rivaldofez.vogames.core.data.source.Resource
 import com.rivaldofez.vogames.core.domain.model.Game
 import com.rivaldofez.vogames.databinding.FragmentGamesBinding

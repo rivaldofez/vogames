@@ -1,5 +1,6 @@
 package com.rivaldofez.vogames.core.data.source.remote
 
+import android.util.Log
 import com.rivaldofez.vogames.core.data.source.remote.network.ApiResponse
 import com.rivaldofez.vogames.core.data.source.remote.network.ApiService
 import com.rivaldofez.vogames.core.BuildConfig
@@ -24,6 +25,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                     emit(ApiResponse.Empty)
                 }
             } catch (e : Exception) {
+                Log.d("Teston", e.toString())
                 emit(ApiResponse.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)
